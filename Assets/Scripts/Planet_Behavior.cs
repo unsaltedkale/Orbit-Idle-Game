@@ -10,21 +10,28 @@ public class Planet_Behavior : MonoBehaviour
     public bool clicked;
     public Vector3 firstMousePos; //h
     public Vector3 secondMousePos; //j
-    public Vector3 clickDistance; //o
-    public Vector3 radiusVar; //r or d
-    public Vector3 xIntercept; //l
-    public Vector3 yIntercept; //z
+    public float clickDistance; //o
+    public float radiusVar; //r or d
+    public float xIntercept; //l1
+    public float yIntercept; //z1
     public float stretchHorizontal; //a
     public float stretchVertical; //b
     public float finalDilation; //g1
     public float theta; //c
+    public Vector3 tangentIntersect;
+    public float v1;
+    public float v2;
+    public float v3;
+    public float v4;
+    public float v5;
+    public float v6;
 
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        StartCoroutine(startPlanet());
+
     }
 
     // Update is called once per frame
@@ -80,7 +87,7 @@ public class Planet_Behavior : MonoBehaviour
     {
         while (clicked == false)
         {
-            Debug.DrawRay(firstMousePos, mousePos, Color.red);
+            Debug.DrawLine(firstMousePos, mousePos, Color.red);
 
             if (clicked == true)
             {
@@ -93,7 +100,9 @@ public class Planet_Behavior : MonoBehaviour
 
     public IEnumerator calculateOrbit()
     {
+        radiusVar = Mathf.Sqrt((Mathf.Pow(firstMousePos.x, 2)) + (Mathf.Pow(firstMousePos.y, 2)));
 
+        clickDistance = Mathf.Sqrt((Mathf.Pow(firstMousePos.x - secondMousePos.x, 2)) + (Mathf.Pow(firstMousePos.y - secondMousePos.y, 2)));
 
         yield break;
     }
