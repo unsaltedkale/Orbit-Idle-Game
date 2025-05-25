@@ -36,11 +36,11 @@ public class Star_Behavior : MonoBehaviour
 
     void CalculateStar()
     {
-        solarMass = Mathf.Clamp(solarMass, 0f, 20f);
+        solarMass = Mathf.Clamp(solarMass, 0.01f, 20f);
 
-        solarRadius = ((solarRadiusMax - solarRadiusMin) / (solarMassMax - solarMassMin)) * (solarMass - solarMassMin) + solarRadiusMin;
+        //solarRadius = ((solarRadiusMax - solarRadiusMin) / (solarMassMax - solarMassMin)) * (solarMass - solarMassMin) + solarRadiusMin;
 
-        //solarRadius = Mathf.Pow(solarMass, 0.81f);
+        solarRadius = (Mathf.Pow(solarMass, 0.78f) + 0.25f);
 
         transform.localScale = new Vector3(solarRadius, solarRadius, solarRadius);
 
