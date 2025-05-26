@@ -28,6 +28,7 @@ public class Planet_Behavior : MonoBehaviour
     public LineRenderer lR;
     public TrailRenderer tR;
     public bool startingPlanet;
+    public Vector3 vectorHold;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -57,7 +58,7 @@ public class Planet_Behavior : MonoBehaviour
         }
 
         mousePos = Input.mousePosition - new Vector3(Screen.width / 2, Screen.height / 2, 0);
-        
+
         if (lR.enabled == true)
         {
             lR.SetPosition(1, mousePos / 152);
@@ -83,7 +84,7 @@ public class Planet_Behavior : MonoBehaviour
 
             transform.position = new Vector3(v5, v6, 0f);
         }
-        
+
     }
 
     public IEnumerator startPlanet()
@@ -134,6 +135,22 @@ public class Planet_Behavior : MonoBehaviour
 
         g1 = 1;
 
+        /*for (float i = 0; i < 360; i++)
+        {
+            theta = i * Mathf.Deg2Rad;
+
+            v1 = d * a * Mathf.Sin(theta);
+            v2 = d * b * Mathf.Cos(theta);
+
+            Vector3 point = new Vector3(v1, v2, 0f);
+
+            yield return StartCoroutine(ClosestPointOnLine(h, j, point));
+
+            Vector3 closestPoint = vectorHold;
+
+
+        }*/
+
 
         theta = Vector2.Angle(Vector2.right, transform.position);
 
@@ -149,16 +166,54 @@ public class Planet_Behavior : MonoBehaviour
 
         v6 = (v2 + v4) / 2;
 
-        transform.position = new Vector3 (v5, v6, 0);
+        transform.position = new Vector3(v5, v6, 0);
 
         tR.enabled = true;
-        startingPlanet = false; 
+        startingPlanet = false;
 
 
         //go along line
         //yield return new WaitUntil(() => distance between is less than 0.01f);
 
         //go along curve starting from intersection point
+
+        yield break;
+    }
+
+    public IEnumerator ClosestPointOnLine(Vector3 vA, Vector3 vB, Vector3 vPoint)
+    {
+        //distance between point and start point
+        Vector3 vVector1 = vPoint - vA;
+
+        Vector3 vVector2 = (vB - vA).normalized;
+
+        float d = Vector3.Distance(vA, vB);
+        float t = Vector3.Dot(vVector2, vVector1);
+
+        if (t <= 0)
+        {
+            print("yielded vA");
+            vectorHold = vA;
+            yield return vA;
+            yield break;
+        }
+
+
+        if (t >= d)
+        {
+            print("yielded vB");
+            vectorHold = vB;
+            yield return vB;
+            yield break;
+        }
+
+        Vector3 vVector3 = vVector2 * t;
+
+        Vector3 vClosestPoint = vA + vVector3;
+
+        vectorHold = vClosestPoint;
+
+        yield return vClosestPoint;
 
         yield break;
     }
