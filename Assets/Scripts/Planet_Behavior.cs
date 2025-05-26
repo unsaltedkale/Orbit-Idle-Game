@@ -8,8 +8,6 @@ public class Planet_Behavior : MonoBehaviour
     public float orbitSpeed;
     public float rotationSpeed;
     public Vector3 mousePos;
-    public Vector3 mousePosHold;
-    public bool clicked;
     public Vector3 firstMousePos; //h
     public Vector3 secondMousePos; //j
     public float clickDistance; //o
@@ -27,12 +25,21 @@ public class Planet_Behavior : MonoBehaviour
     public float v4;
     public float v5;
     public float v6;
-
+    public LineRenderer lR;
+    public TrailRenderer tR;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        lR = gameObject.GetComponent<LineRenderer>();
+
+        lR.enabled = false;
+
+        tR = gameObject.GetComponent<TrailRenderer>();
+
+        tR.enabled = false;
+
         orbitSpeed = 1;
 
         StartCoroutine(startPlanet());
@@ -41,22 +48,21 @@ public class Planet_Behavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        mousePos = Input.mousePosition - new Vector3(Screen.width / 2, Screen.height / 2, 0);
-
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (lR.enabled == true)
         {
-            print(mousePos);
+            lR.SetPosition(1, mousePos / 152);
         }
 
-        theta += (orbitSpeed * Time.deltaTime);
+        mousePos = Input.mousePosition - new Vector3(Screen.width / 2, Screen.height / 2, 0);
+
+        /*theta += (orbitSpeed * Time.deltaTime);
 
         theta = theta % (2 * Mathf.PI);
 
         v1 = radiusVar * stretchVertical * Mathf.Sin(theta);
         v2 = radiusVar * stretchHorizontal * Mathf.Cos(theta);
 
-        transform.position = new Vector3(v1, v2, 0f);
+        transform.position = new Vector3(v1, v2, 0f);*/
     }
 
     public IEnumerator startPlanet()
@@ -65,23 +71,24 @@ public class Planet_Behavior : MonoBehaviour
 
         yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Mouse0) == true);
 
-        mousePosHold = firstMousePos;
+        firstMousePos = mousePos / 152;
 
         transform.position = firstMousePos;
 
-        /*mousePosHold = new Vector3(0, 0, 0);
-        clicked = false;
+        yield return null;
 
         //second click for velocity
 
-        StartCoroutine(drawVelocityRay());
+        lR.enabled = true;
 
-        yield return StartCoroutine(waitforMouseClick());
+        lR.positionCount = 2;
+        lR.SetPosition(0, transform.position);
 
-        mousePosHold = secondMousePos;
+        yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Mouse0) == true);
 
-        mousePosHold = new Vector3(0, 0, 0);
-        clicked = false;
+        secondMousePos = mousePos / 152;
+
+        lR.enabled = false;
 
         //calculate orbit
 
@@ -91,40 +98,21 @@ public class Planet_Behavior : MonoBehaviour
         yield break;
     }
 
-    public IEnumerator waitforMouseClick()
-    {
-        while (clicked == false)
-        {
-            if (Input.GetKeyDown(KeyCode.Mouse0))
-            {
-                clicked = true;
-                mousePos = mousePosHold;
-                yield break;
-            }
-        }
-    }
-
-    public IEnumerator drawVelocityRay()
-    {
-        while (clicked == false)
-        {
-            Debug.DrawLine(firstMousePos, mousePos, Color.red);
-
-            if (clicked == true)
-            {
-                yield break;
-            }
-        }
-
-
-    }
-
     public IEnumerator calculateOrbit()
     {
         radiusVar = Mathf.Sqrt((Mathf.Pow(firstMousePos.x, 2)) + (Mathf.Pow(firstMousePos.y, 2)));
 
         clickDistance = Mathf.Sqrt((Mathf.Pow(firstMousePos.x - secondMousePos.x, 2)) + (Mathf.Pow(firstMousePos.y - secondMousePos.y, 2)));
 
+        
+
+
+        //go along line
+        //yield return new WaitUntil(() => distance between is less than 0.01f);
+
+        //go along curve starting from intersection point
+
         yield break;
     }
+    
 }
