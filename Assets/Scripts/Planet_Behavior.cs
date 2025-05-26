@@ -5,6 +5,8 @@ public class Planet_Behavior : MonoBehaviour
 {
 
     public GameObject star;
+    public float orbitSpeed;
+    public float rotationSpeed;
     public Vector3 mousePos;
     public Vector3 mousePosHold;
     public bool clicked;
@@ -31,24 +33,43 @@ public class Planet_Behavior : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        orbitSpeed = 1;
 
+        StartCoroutine(startPlanet());
     }
 
     // Update is called once per frame
     void Update()
     {
+        
         mousePos = Input.mousePosition - new Vector3(Screen.width / 2, Screen.height / 2, 0);
+
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            print(mousePos);
+        }
+
+        theta += (orbitSpeed * Time.deltaTime);
+
+        theta = theta % (2 * Mathf.PI);
+
+        v1 = radiusVar * stretchVertical * Mathf.Sin(theta);
+        v2 = radiusVar * stretchHorizontal * Mathf.Cos(theta);
+
+        transform.position = new Vector3(v1, v2, 0f);
     }
 
     public IEnumerator startPlanet()
     {
         //first click
 
-        yield return StartCoroutine(waitforMouseClick());
+        yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Mouse0) == true);
 
         mousePosHold = firstMousePos;
 
-        mousePosHold = new Vector3(0, 0, 0);
+        transform.position = firstMousePos;
+
+        /*mousePosHold = new Vector3(0, 0, 0);
         clicked = false;
 
         //second click for velocity
@@ -66,7 +87,7 @@ public class Planet_Behavior : MonoBehaviour
 
         yield return StartCoroutine(calculateOrbit());
 
-        //another coroutine to send it on a line and then transition to orbit
+        //another coroutine to send it on a line and then transition to orbit*/
         yield break;
     }
 
