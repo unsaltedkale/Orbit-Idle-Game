@@ -10,6 +10,7 @@ public class Planet_Behavior : MonoBehaviour
     public Vector3 mousePos;
     public Vector3 h; //firstMousePos
     public Vector3 j; //secondMousePos
+    public float r; 
     public float o; //clickDistance
     public float d; //radiusVar
     public float l1; //xintercept
@@ -91,12 +92,17 @@ public class Planet_Behavior : MonoBehaviour
                 }
             }
 
-            if (Mathf.Abs(transform.position.x) < 0.02f)
+            if (Mathf.Abs(transform.position.x) < 0.02f && hasHitIntersect == false)
             {
                 hasHitIntersect = true;
+            }
 
-                orbitSpeed = orbitSpeed / Mathf.PI*(1.5f(a+b) - Mathf.Pow(a*b, 0.5f))
-            } 
+            if (hasHitIntersect == true)
+            {
+                 
+            
+                orbitSpeed = (Mathf.Abs(1/(Mathf.Abs(r)-1))) + ((orbitSpeed) / (Mathf.PI * ((3 * (a + b)) - Mathf.Sqrt(((3 * a) + b) * (a + (3 * b))))));
+            }
         }
 
 
@@ -104,12 +110,12 @@ public class Planet_Behavior : MonoBehaviour
             {
                 if (h.x < j.x)
                 {
-                    theta += (h.y / Mathf.Abs(h.y)) * (orbitSpeed * Time.deltaTime / Mathf.PI);
+                    theta += (h.y / Mathf.Abs(h.y)) * (orbitSpeed * Time.deltaTime);
                 }
 
                 else if (h.x > j.x)
                 {
-                    theta -= (h.y / Mathf.Abs(h.y)) * (orbitSpeed * Time.deltaTime / Mathf.PI);   
+                    theta -= (h.y / Mathf.Abs(h.y)) * (orbitSpeed * Time.deltaTime);   
                 }
 
                 theta = theta % (2 * Mathf.PI);
@@ -169,7 +175,7 @@ public class Planet_Behavior : MonoBehaviour
     {
         j = new Vector3 (j.x, 0f, 0f);
 
-        //d = Mathf.Sqrt((Mathf.Pow(h.x, 2)) + (Mathf.Pow(h.y, 2)));
+        r = Mathf.Sqrt((Mathf.Pow(h.x, 2)) + (Mathf.Pow(h.y, 2)));
 
         d = h.y;
 
@@ -179,11 +185,16 @@ public class Planet_Behavior : MonoBehaviour
 
         //a = o / l1;
 
-        a = o/2;
+        a = Mathf.Abs(o * (1/(d * d)));
+
+        if (a < 1)
+        {
+            a = 1/a;
+        }
 
         //b = l1 / d;
 
-        b = 1;
+            b = 1;
 
         g1 = 1;
 
