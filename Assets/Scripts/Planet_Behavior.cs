@@ -31,11 +31,13 @@ public class Planet_Behavior : MonoBehaviour
     public bool startingPlanet;
     public Vector3 vectorHold;
     public bool hasHitIntersect;
+    public float solarMass;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+
         lR = gameObject.GetComponent<LineRenderer>();
 
         lR.enabled = false;
@@ -99,8 +101,8 @@ public class Planet_Behavior : MonoBehaviour
 
             if (hasHitIntersect == true)
             {
-                 
-            
+                print((Mathf.Abs(4 / (Mathf.Abs(r) - 1))));
+                
                 orbitSpeed = (Mathf.Abs(1/(Mathf.Abs(r)-1))) + ((orbitSpeed) / (Mathf.PI * ((3 * (a + b)) - Mathf.Sqrt(((3 * a) + b) * (a + (3 * b))))));
             }
         }
@@ -139,6 +141,10 @@ public class Planet_Behavior : MonoBehaviour
 
     public IEnumerator startPlanet()
     {
+        yield return  null;
+
+        solarMass = GameObject.Find("Star").GetComponent<Star_Behavior>().solarMass;
+
         startingPlanet = true;
         //first click
 
@@ -157,7 +163,7 @@ public class Planet_Behavior : MonoBehaviour
         lR.positionCount = 2;
         lR.SetPosition(0, transform.position);
 
-        yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Mouse0) == true);
+        yield return new WaitUntil(() => Input.GetKeyUp(KeyCode.Mouse0) == true);
 
         j = mousePos / 152;
 
@@ -219,7 +225,7 @@ public class Planet_Behavior : MonoBehaviour
 
         v6 = (v2 + v4) / 2;
 
-        orbitSpeed = o;
+        orbitSpeed = Mathf.Pow(o,3/2);
 
         tR.enabled = true;
         startingPlanet = false;

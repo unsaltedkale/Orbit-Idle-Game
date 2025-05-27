@@ -225,15 +225,16 @@ MonoBehaviour:
   orbitSpeed: 0
   rotationSpeed: 0
   mousePos: {x: 0, y: 0, z: 0}
-  firstMousePos: {x: 0, y: 0, z: 0}
-  secondMousePos: {x: 0, y: 0, z: 0}
-  clickDistance: 0
-  radiusVar: 0
-  xIntercept: 0
-  yIntercept: 0
-  stretchHorizontal: 0
-  stretchVertical: 0
-  finalDilation: 0
+  h: {x: 0, y: 0, z: 0}
+  j: {x: 0, y: 0, z: 0}
+  r: 0
+  o: 0
+  d: 0
+  l1: 0
+  z1: 0
+  a: 0
+  b: 0
+  g1: 0
   theta: 0
   tangentIntersect: {x: 0, y: 0, z: 0}
   v1: 0
@@ -244,6 +245,10 @@ MonoBehaviour:
   v6: 0
   lR: {fileID: 0}
   tR: {fileID: 0}
+  startingPlanet: 0
+  vectorHold: {x: 0, y: 0, z: 0}
+  hasHitIntersect: 0
+  solarMass: 0
 --- !u!120 &300030229
 LineRenderer:
   serializedVersion: 2
@@ -396,7 +401,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 5
+  m_Time: 1.43
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
