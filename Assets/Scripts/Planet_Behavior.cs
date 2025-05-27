@@ -29,6 +29,7 @@ public class Planet_Behavior : MonoBehaviour
     public TrailRenderer tR;
     public bool startingPlanet;
     public Vector3 vectorHold;
+    public bool hasHitIntersect;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -44,6 +45,8 @@ public class Planet_Behavior : MonoBehaviour
 
         orbitSpeed = 1;
 
+        hasHitIntersect = false;
+
         StartCoroutine(startPlanet());
     }
 
@@ -53,6 +56,8 @@ public class Planet_Behavior : MonoBehaviour
         if (startingPlanet == false && Input.GetKeyDown(KeyCode.R))
         {
             startingPlanet = true;
+            hasHitIntersect = false;
+            lR.enabled = false;
             tR.enabled = false;
             StartCoroutine(startPlanet());
         }
@@ -61,29 +66,68 @@ public class Planet_Behavior : MonoBehaviour
 
         if (lR.enabled == true)
         {
-            lR.SetPosition(1, mousePos / 152);
+            lR.SetPosition(1, new Vector3 (mousePos.x / 152, h.y, 0));
         }
 
-        if (tR.enabled == true)
+        if (tR.enabled == true && hasHitIntersect == false)
         {
-            v1 = d * a * Mathf.Sin(theta);
+            if (h.x < j.x)
+            {
+                transform.position = new Vector3(transform.position.x + (orbitSpeed * Time.deltaTime), transform.position.y, transform.position.z);
 
-            v2 = d * b * Mathf.Cos(theta);
+                if (transform.position.x >= 0)
+                {
+                    hasHitIntersect = true;
+                }
+            }
 
-            v3 = ((l1 * Mathf.Sin(theta)) / g1);
+            else if (h.x > j.x)
+            {
+                transform.position = new Vector3(transform.position.x - (orbitSpeed * Time.deltaTime), transform.position.y, transform.position.z);
 
-            v4 = ((d / g1) * (o / l1) * Mathf.Cos(theta));
+                if (transform.position.x <= 0)
+                {
+                    hasHitIntersect = true;
+                }
+            }
 
-            v5 = (v1 + v3) / 2;
+            if (Mathf.Abs(transform.position.x) < 0.02f)
+            {
+                hasHitIntersect = true;
 
-            v6 = (v2 + v4) / 2;
-
-            theta += (orbitSpeed * Time.deltaTime);
-
-            theta = theta % (2 * Mathf.PI);
-
-            transform.position = new Vector3(v5, v6, 0f);
+                orbitSpeed = orbitSpeed / Mathf.PI*(1.5f(a+b) - Mathf.Pow(a*b, 0.5f))
+            } 
         }
+
+
+        if (tR.enabled == true && hasHitIntersect == true)
+            {
+                if (h.x < j.x)
+                {
+                    theta += (h.y / Mathf.Abs(h.y)) * (orbitSpeed * Time.deltaTime / Mathf.PI);
+                }
+
+                else if (h.x > j.x)
+                {
+                    theta -= (h.y / Mathf.Abs(h.y)) * (orbitSpeed * Time.deltaTime / Mathf.PI);   
+                }
+
+                theta = theta % (2 * Mathf.PI);
+
+                v1 = d * a * Mathf.Sin(theta);
+
+                v2 = d * b * Mathf.Cos(theta);
+
+                v3 = ((l1 * Mathf.Sin(theta)) / g1);
+
+                v4 = ((d / g1) * (o / l1) * Mathf.Cos(theta));
+
+                v5 = (v1 + v3) / 2;
+
+                v6 = (v2 + v4) / 2;
+
+                transform.position = new Vector3(v1, v2, 0f);
+            }
 
     }
 
@@ -123,36 +167,34 @@ public class Planet_Behavior : MonoBehaviour
 
     public IEnumerator calculateOrbit()
     {
-        d = Mathf.Sqrt((Mathf.Pow(h.x, 2)) + (Mathf.Pow(h.y, 2)));
+        j = new Vector3 (j.x, 0f, 0f);
+
+        //d = Mathf.Sqrt((Mathf.Pow(h.x, 2)) + (Mathf.Pow(h.y, 2)));
+
+        d = h.y;
 
         o = Mathf.Sqrt((Mathf.Pow(h.x - j.x, 2)) + (Mathf.Pow(h.y - j.y, 2)));
 
         l1 = ((-j.y) * ((j.x - h.x) / (j.y - h.y))) + j.x;
 
-        a = o / l1;
+        //a = o / l1;
 
-        b = l1 / d;
+        a = o/2;
+
+        //b = l1 / d;
+
+        b = 1;
 
         g1 = 1;
 
-        /*for (float i = 0; i < 360; i++)
+        tangentIntersect = new Vector3(h.y, 0f, 0f);
+
+        theta = 0;
+
+        if (h.y < 0)
         {
-            theta = i * Mathf.Deg2Rad;
-
-            v1 = d * a * Mathf.Sin(theta);
-            v2 = d * b * Mathf.Cos(theta);
-
-            Vector3 point = new Vector3(v1, v2, 0f);
-
-            yield return StartCoroutine(ClosestPointOnLine(h, j, point));
-
-            Vector3 closestPoint = vectorHold;
-
-
-        }*/
-
-
-        theta = Vector2.Angle(Vector2.right, transform.position);
+            theta = 2 * Mathf.PI;
+        }
 
         v1 = d * a * Mathf.Sin(theta);
 
@@ -166,7 +208,7 @@ public class Planet_Behavior : MonoBehaviour
 
         v6 = (v2 + v4) / 2;
 
-        transform.position = new Vector3(v5, v6, 0);
+        orbitSpeed = o;
 
         tR.enabled = true;
         startingPlanet = false;
