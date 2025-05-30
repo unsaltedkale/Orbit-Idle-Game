@@ -9,10 +9,6 @@
 
 # 🌌☀️🪐 Orbit: A Background Idle Game
 
-
-
-###### A gif of an Alpha version of Orbit. It shows a circle growing and shrinking. When the circle is small, it is red, as it grows it turns orange, then yellow, then white, then blue-white, and finally blue.
-
 ## What is Orbit?
 
 Orbit is a relaxing idle game being developed for [⛵Shipwrecked](https://shipwrecked.hackclub.com/) based on the life cycles of stars. Your star will evolve from a protostar, to a main-squence star, expand as it becomes a giant, and explode in a super-nova! (If your star has enough mass, of course...)\
