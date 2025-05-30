@@ -28,29 +28,27 @@ Orbit, due to being about astronomy, planets, and orbital mechanics, has taken a
 ⭐ Star evolution!  
 ⭐ Pretty Art!  
 ⭐ Different star masses that evolve differently!  
-⭐ Planets that you can throw into orbit!  
+⭐ Differently sized planets that you can throw into orbit!  
 ⭐ Once your star goes out, recycle your star to make a protostar with more mass!  
 ⭐ A pause button!  
 🌟 All based on real star facts!!  
 
 #### Some features that are way less certain, but have *have a tiny chance* to exist are:
-⭐ Planetary collisons that can make moons or astroid belts!
+⭐ Planetary collisons that can make moons or astroid belts!  
 ⭐ Highly-customizable settings to tweak your expierience, such as:  
-    🌠 Slowing down or speeding up the progression of the star, as well as special events
-    🌠 Pausing the game automatically when special events happen so you can focus on finishing your task before watching what happens
-    🌠 Removing planet collisions! (Because orbits that don't collide are hard)
+* Slowing down or speeding up the progression of the star, as well as special events  
+* Pausing the game automatically when special events happen so you can focus on finishing your task before watching what happens  
+* Removing planet collisions! (Because orbits that don't collide are hard)
+
 ⭐ Click on your star as it evolves to learn cool star facts about it!  
 ⭐ Maybe even click on your planets to learn cool planet facts about it!  
 ⭐ Achievements!  
 ⭐ Special events like:  
-    🌠 Binary star systems, or even trinary star systems! (if you have enough mass)  
-    🌠 Comets!  
-    🌠 Binary or trinary planet systems!
+* Binary star systems, or even trinary star systems! (if you have enough mass)  
+* Comets!  
+* Binary or trinary planet systems!
+
 🌟 And rare chance some familar planets might wander in for you to rehome...  
-
-
-
-
 
 [^1]: Minimal Viable Product
 [^2]: Elipses my beloathed 😞💔 
