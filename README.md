@@ -1,11 +1,11 @@
 > [!NOTE]
-> Orbit is still in alpha and is not released in a stable form. Hestia (Alex) is working on it, I promise!
+> Orbit is still in alpha and is not released in a stable form. Hestia is working on it-- promise!
 
 > [!IMPORTANT]
 > All information and screenshots shown were created while the game is still in alpha or beta and are subject to change.
 
 > [!CAUTION]
-> Orbit has become a bigger project than Hestia (Alex) expected. The shipped product (or most likely *demo*) might not have everything advertised.
+> Orbit has become a bigger project than Hestia expected. The shipped product (or most likely *demo*) might not have everything advertised.
 
 # 🌌☀️🪐 Orbit: A Background Idle Game
 
