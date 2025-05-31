@@ -11,19 +11,19 @@
 
 ## What is Orbit?
 
-Orbit is a relaxing idle game being developed for [⛵Shipwrecked](https://shipwrecked.hackclub.com/) based on the life cycles of stars. Your star will evolve from a protostar, to a main-squence star, expand as it becomes a giant, and explode in a super-nova! (If your star has enough mass, of course...)\
+Orbit is a relaxing idle game being developed for [⛵ Shipwrecked](https://shipwrecked.hackclub.com/) based on the life cycles of stars. Your star will evolve from a protostar, to a main-squence star, expand as it becomes a giant, and explode in a super-nova! (If your star has enough mass, of course...)\
 \
 Rouge planets will sometimes wander into your gravity as well. Throw planets into orbit and watch as your solar system slowly evolves in the background.
 
 ## What makes Orbit different than other idle games?
 
-Unlike some idle games which are based in rapid progression and ever-growing numbers, I'm building this game to be something relaxing you can run on a second monitor or in the corner while you work, listen to music, or research more star facts. The only true progression how much mass your star has each life cycle, which can't be upgraded or changed through clicking or interacting-- only time will make your star bigger as it recycles itself.   
+Unlike some idle games which are based in rapid progression and ever-growing numbers, I'm building this game to be something relaxing you can run on a second monitor or in the corner while you work, listen to music, or research more star facts. The only true progression how much mass your star has each life cycle, which can't be upgraded or changed through clicking or interacting-- only time will make your star bigger as you recycle it.   
 
 ## What are some features of orbit?
 
 Orbit, due to being about astronomy, planets, and orbital mechanics, has taken a lot more time to just get the MVP[^1] stuff down than I expected[^2]. When I ship this, I hope to implement as many features as I possibly can, but, unforunately, I cannot do everything.
 
-#### Some features that will almost definitely exist are be:  
+#### Some features that will almost definitely exist are:  
   
 ⭐ Star evolution!  
 ⭐ Pretty Art!  
