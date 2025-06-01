@@ -22,29 +22,40 @@ public class Planet_Behavior : MonoBehaviour
     public Vector3 tangentIntersect;
     public float v1;
     public float v2;
-    public float v3;
+    /*public float v3;
     public float v4;
     public float v5;
-    public float v6;
+    public float v6;*/
     public LineRenderer lR;
     public TrailRenderer tR;
     public bool startingPlanet;
     public Vector3 vectorHold;
     public bool hasHitIntersect;
     public float solarMass;
-
+    public GameManager gm;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
-        lR = gameObject.GetComponent<LineRenderer>();
+        gm = FindFirstObjectByType<GameManager>();
 
         lR.enabled = false;
 
-        tR = gameObject.GetComponent<TrailRenderer>();
-
         tR.enabled = false;
+
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+
+        Color c = gm.requestColor();
+
+        Color t = c - new Color(0, 0, 0, 1);
+
+        spriteRenderer.color = c;
+
+        lR.startColor = t;
+        lR.endColor = c;
+
+        tR.startColor = c;
+        tR.endColor = t;
 
         orbitSpeed = 1;
 
@@ -65,11 +76,15 @@ public class Planet_Behavior : MonoBehaviour
             StartCoroutine(startPlanet());
         }
 
-        mousePos = Input.mousePosition - new Vector3(Screen.width / 2, Screen.height / 2, 0);
+        //mousePos = (Input.mousePosition) - new Vector3(Screen.width / 2, Screen.height / 2, 0);
+        Vector3 temp = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y));
+        temp.z = 0f;
+        mousePos = temp;
+
 
         if (lR.enabled == true)
         {
-            lR.SetPosition(1, new Vector3 (mousePos.x / 152, h.y, 0));
+            lR.SetPosition(1, new Vector3(mousePos.x, h.y, 0));
         }
 
         if (tR.enabled == true && hasHitIntersect == false)
@@ -102,8 +117,14 @@ public class Planet_Behavior : MonoBehaviour
             if (hasHitIntersect == true)
             {
                 print((Mathf.Abs(4 / (Mathf.Abs(r) - 1))));
-                
-                orbitSpeed = (Mathf.Abs(1/(Mathf.Abs(r)-1))) + ((orbitSpeed) / (Mathf.PI * ((3 * (a + b)) - Mathf.Sqrt(((3 * a) + b) * (a + (3 * b))))));
+
+                orbitSpeed = (Mathf.Abs(1 / (Mathf.Abs(r) - 1))) + ((orbitSpeed) / (Mathf.PI * ((3 * (a + b)) - Mathf.Sqrt(((3 * a) + b) * (a + (3 * b))))));
+                float tempR = Mathf.Abs(r)/6;
+                if (tempR < 1)
+                {
+                    tempR = 1;
+                }
+                //orbitSpeed = Mathf.Clamp(orbitSpeed, 0, 0.8f/Mathf.Abs(r));
             }
         }
 
@@ -126,13 +147,13 @@ public class Planet_Behavior : MonoBehaviour
 
                 v2 = d * b * Mathf.Cos(theta);
 
-                v3 = ((l1 * Mathf.Sin(theta)) / g1);
+                //v3 = ((l1 * Mathf.Sin(theta)) / g1);
 
-                v4 = ((d / g1) * (o / l1) * Mathf.Cos(theta));
+                //v4 = ((d / g1) * (o / l1) * Mathf.Cos(theta));
 
-                v5 = (v1 + v3) / 2;
+                //v5 = (v1 + v3) / 2;
 
-                v6 = (v2 + v4) / 2;
+                //v6 = (v2 + v4) / 2;
 
                 transform.position = new Vector3(v1, v2, 0f);
             }
@@ -150,7 +171,7 @@ public class Planet_Behavior : MonoBehaviour
 
         yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Mouse0) == true);
 
-        h = mousePos / 152;
+        h = mousePos;
 
         transform.position = h;
 
@@ -165,7 +186,7 @@ public class Planet_Behavior : MonoBehaviour
 
         yield return new WaitUntil(() => Input.GetKeyUp(KeyCode.Mouse0) == true);
 
-        j = mousePos / 152;
+        j = mousePos;
 
         lR.enabled = false;
 
@@ -173,7 +194,6 @@ public class Planet_Behavior : MonoBehaviour
 
         yield return StartCoroutine(calculateOrbit());
 
-        //another coroutine to send it on a line and then transition to orbit*/
         yield break;
     }
 
@@ -200,7 +220,7 @@ public class Planet_Behavior : MonoBehaviour
 
         //b = l1 / d;
 
-            b = 1;
+        b = 1;
 
         g1 = 1;
 
@@ -217,62 +237,18 @@ public class Planet_Behavior : MonoBehaviour
 
         v2 = d * b * Mathf.Cos(theta);
 
-        v3 = ((l1 * Mathf.Sin(theta)) / g1);
+        //v3 = ((l1 * Mathf.Sin(theta)) / g1);
 
-        v4 = ((d / g1) * (o / l1) * Mathf.Cos(theta));
+        //v4 = ((d / g1) * (o / l1) * Mathf.Cos(theta));
 
-        v5 = (v1 + v3) / 2;
+        //v5 = (v1 + v3) / 2;
 
-        v6 = (v2 + v4) / 2;
+        //v6 = (v2 + v4) / 2;
 
         orbitSpeed = Mathf.Pow(o,3/2);
 
         tR.enabled = true;
         startingPlanet = false;
-
-
-        //go along line
-        //yield return new WaitUntil(() => distance between is less than 0.01f);
-
-        //go along curve starting from intersection point
-
-        yield break;
-    }
-
-    public IEnumerator ClosestPointOnLine(Vector3 vA, Vector3 vB, Vector3 vPoint)
-    {
-        //distance between point and start point
-        Vector3 vVector1 = vPoint - vA;
-
-        Vector3 vVector2 = (vB - vA).normalized;
-
-        float d = Vector3.Distance(vA, vB);
-        float t = Vector3.Dot(vVector2, vVector1);
-
-        if (t <= 0)
-        {
-            print("yielded vA");
-            vectorHold = vA;
-            yield return vA;
-            yield break;
-        }
-
-
-        if (t >= d)
-        {
-            print("yielded vB");
-            vectorHold = vB;
-            yield return vB;
-            yield break;
-        }
-
-        Vector3 vVector3 = vVector2 * t;
-
-        Vector3 vClosestPoint = vA + vVector3;
-
-        vectorHold = vClosestPoint;
-
-        yield return vClosestPoint;
 
         yield break;
     }
