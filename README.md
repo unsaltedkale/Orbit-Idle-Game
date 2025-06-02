@@ -9,6 +9,12 @@
 
 # 🌌☀️🪐 Orbit: A Background Idle Game
 
+
+
+https://github.com/user-attachments/assets/48f7f3c9-36f3-40c7-8fd2-46c1651e7c3f
+
+###### A video of the alpha version of Orbit. The user slowly zooms out using a zoom slider on the right side, showing many differently-colored planets that all orbit at different speeds and distances around a blue star.
+
 ## What is Orbit?
 
 Orbit is a relaxing idle game being developed for [⛵ Shipwrecked](https://shipwrecked.hackclub.com/) based on the life cycles of stars. Your star will evolve from a protostar, to a main-squence star, expand as it becomes a giant, and explode in a super-nova! (If your star has enough mass, of course...)\
