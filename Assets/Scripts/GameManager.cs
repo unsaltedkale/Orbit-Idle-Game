@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
-
+    public static GameManager gm;
     public List<Color> colorList;
     public List<Color> colorAvailableList;
 
