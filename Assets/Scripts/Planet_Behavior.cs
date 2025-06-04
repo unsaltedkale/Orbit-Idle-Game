@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using TMPro;
 
 public class Planet_Behavior : MonoBehaviour
 {
@@ -34,6 +36,8 @@ public class Planet_Behavior : MonoBehaviour
     public float solarMass;
     public GameManager gm;
     public int key;
+    public TextMeshProUGUI namePlate;
+    public Vector3 offset;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -63,12 +67,19 @@ public class Planet_Behavior : MonoBehaviour
         hasHitIntersect = false;
 
         StartCoroutine(startPlanet());
+
+        namePlate.text = "Planet " + key.ToString();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (startingPlanet == false && Input.GetKeyDown(KeyCode.R))
+
+        Vector3 roll = Camera.main.WorldToScreenPoint(transform.position + offset);
+        roll.z = 0f;
+        namePlate.transform.position = roll;
+
+        if (startingPlanet == false && Input.GetKeyDown("" + key.ToString()))
         {
             startingPlanet = true;
             hasHitIntersect = false;

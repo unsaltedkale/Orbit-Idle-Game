@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -48,7 +49,7 @@ public class GameManager : MonoBehaviour
             {
                 if (b != null)
                 {
-                    if (b.GetComponent<Planet_Behavior>().b == 0)
+                    if (b.GetComponent<Planet_Behavior>().a == 0)
                     {
                         abort = true;
                         break;
@@ -60,8 +61,7 @@ public class GameManager : MonoBehaviour
             {
                 if (planetNumbersAvailable[k - 1] == null)
                 {
-                    GameObject p = planet;
-                    Instantiate(p);
+                    GameObject p = Instantiate(planet);
 
                     Vector3 temp = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y));
                     temp.z = 0f;
