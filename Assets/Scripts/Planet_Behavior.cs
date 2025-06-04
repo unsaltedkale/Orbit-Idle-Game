@@ -33,6 +33,7 @@ public class Planet_Behavior : MonoBehaviour
     public bool hasHitIntersect;
     public float solarMass;
     public GameManager gm;
+    public int key;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
