@@ -26,7 +26,6 @@ public class Planet_Behavior : MonoBehaviour
     public bool startingPlanet;
     public Vector3 vectorHold;
     public bool hasHitIntersect;
-    public float solarMass;
     public int key;
     public TextMeshProUGUI namePlate;
     public Vector3 offset;
@@ -158,8 +157,6 @@ public class Planet_Behavior : MonoBehaviour
     public IEnumerator startPlanet()
     {
         yield return  null;
-
-        solarMass = GameObject.Find("Star").GetComponent<Star_Behavior>().solarMass;
 
         startingPlanet = true;
         //first click

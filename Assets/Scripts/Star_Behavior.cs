@@ -27,7 +27,7 @@ public class Star_Behavior : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        timeOfEachStageSeconds = 200;
+        timeOfEachStageSeconds = 6;
 
         gm = FindFirstObjectByType<GameManager>();
 
@@ -72,7 +72,9 @@ public class Star_Behavior : MonoBehaviour
     {
         if (firstTime)
         {
+            
             lerpVal = 0;
+            progressOfTheStageSeconds = 0;
 
             progressOfTheStageSeconds = 0;
 
@@ -108,6 +110,9 @@ public class Star_Behavior : MonoBehaviour
     {
         if (firstTime)
         {
+            
+            lerpVal = 0;
+            progressOfTheStageSeconds = 0;
 
             oldSize = transform.localScale;
             float f = CalculateSolarRadiusOfGiant();
@@ -144,6 +149,9 @@ public class Star_Behavior : MonoBehaviour
     {
         if (firstTime)
         {
+            
+            lerpVal = 0;
+            progressOfTheStageSeconds = 0;
 
             oldSize = transform.localScale;
             float f = oldSize.x + 0.5f;
@@ -167,27 +175,125 @@ public class Star_Behavior : MonoBehaviour
         {
             print("Giant phase ended");
 
-            currentState = GameManager.starState.giant;
+            currentState = DetermineEndOfLifeStarState();
             firstTime = true;
             
         }
 
-
-        
     }
 
     public void WhiteDwarfUpdate()
     {
-        
+        if (firstTime)
+        {
+
+            lerpVal = 0;
+            progressOfTheStageSeconds = 0;
+
+            oldSize = transform.localScale;
+            float f = 0.2f;
+            targetSize = new Vector3(f, f, f);
+
+            oldColor = sR.color;
+            targetColor = Color.Lerp(Color.white, Color.grey, 0.1f);
+
+            firstTime = false;
+
+            gm.SuperNovaExplosion();
+        }
+
+        progressOfTheStageSeconds += Time.deltaTime;
+
+        lerpVal = progressOfTheStageSeconds / 3f;
+
+        transform.localScale = Vector3.Lerp(oldSize, targetSize, lerpVal);
+
+        sR.color = Color.Lerp(oldColor, targetColor, lerpVal);
+
+        if (progressOfTheStageSeconds >= timeOfEachStageSeconds)
+        {
+            print("Waiting For Recycle after WhiteDwarf");
+
+            currentState = GameManager.starState.waitingForRecycle;
+            firstTime = true;
+            
+        }
+
     }
 
     public void NeutronStarUpdate()
     {
+        if (firstTime)
+        {
+            lerpVal = 0;
+            progressOfTheStageSeconds = 0;
+
+            oldSize = transform.localScale;
+            float f = 0.1f;
+            targetSize = new Vector3(f, f, f);
+
+            oldColor = sR.color;
+            targetColor = Color.Lerp(Color.white, Color.blue, 0.1f);
+
+            firstTime = false;
+
+            gm.SuperNovaExplosion();
+        }
+
+        progressOfTheStageSeconds += Time.deltaTime;
+
+        lerpVal = progressOfTheStageSeconds / 3f;
+
+        transform.localScale = Vector3.Lerp(oldSize, targetSize, lerpVal);
+
+        sR.color = Color.Lerp(oldColor, targetColor, lerpVal);
+
+        if (progressOfTheStageSeconds >= timeOfEachStageSeconds)
+        {
+            print("Waiting For Recycle after Neutron Star");
+
+            currentState = GameManager.starState.waitingForRecycle;
+            firstTime = true;
+            
+        }
         
     }
 
     public void BlackHoleUpdate()
     {
+        if (firstTime)
+        {
+            lerpVal = 0;
+            progressOfTheStageSeconds = 0;
+
+            oldSize = transform.localScale;
+            float f = 0.2f;
+            targetSize = new Vector3(f, f, f);
+
+            oldColor = sR.color;
+            targetColor = Color.black;
+
+            firstTime = false;
+
+            gm.SuperNovaExplosion();
+        }
+
+        progressOfTheStageSeconds += Time.deltaTime;
+
+        lerpVal = progressOfTheStageSeconds / 3f;
+
+        transform.localScale = Vector3.Lerp(oldSize, targetSize, lerpVal);
+
+        sR.color = Color.Lerp(oldColor, targetColor, lerpVal);
+
+        if (progressOfTheStageSeconds >= timeOfEachStageSeconds)
+        {
+            print("Waiting For Recycle after BlackHole");
+
+            currentState = GameManager.starState.waitingForRecycle;
+            firstTime = true;
+            
+        }
         
     }
 
@@ -270,19 +376,24 @@ public class Star_Behavior : MonoBehaviour
         {
             return GameManager.starState.whiteDwarf;
         }
-        
+
 
         else if (8f < solarMass && solarMass < 16f)
         {
             return GameManager.starState.neutronStar;
         }
-        
+
         else if (16f < solarMass)
         {
             return GameManager.starState.blackHole;
         }
 
-        return new Color(0, 0, 0, 1);
+        else
+        {
+            print("Error calculating end of star life. Returning White Dwarf Automatically.");
+
+            return GameManager.starState.whiteDwarf;
+        }
 
     }
 }

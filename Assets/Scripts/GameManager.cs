@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public GameObject planet;
     public GameObject starPrefab;
     public GameObject star;
+    public GameObject superNova;
     public bool abort;
     public float baseStarMass;
     public enum starState
@@ -22,6 +23,7 @@ public class GameManager : MonoBehaviour
         whiteDwarf,
         neutronStar,
         blackHole,
+        waitingForRecycle,
         recycle
     }
     public starState currentState;
@@ -53,7 +55,7 @@ public class GameManager : MonoBehaviour
 
         Color newProtoStarColor = colorProtoStars[Random.Range(0, colorProtoStars.Count)];
 
-        star = Instantiate(starPrefab, new Vector3(0, 0, 0), new Quaternion(0,0,0,0));
+        star = Instantiate(starPrefab, new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0));
 
         yield return null;
 
@@ -142,5 +144,11 @@ public class GameManager : MonoBehaviour
         colorAvailableList.RemoveAt(i);
 
         return d;
+    }
+
+    public void SuperNovaExplosion()
+    {
+        GameObject s = Instantiate(superNova);
+        s.transform.position = new Vector3(0, 0, 0);
     }
 }

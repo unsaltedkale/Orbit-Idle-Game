@@ -669,6 +669,7 @@ MonoBehaviour:
   planet: {fileID: 8184354833867868453, guid: 53339866ac6ea451bbda86986231e0fa, type: 3}
   starPrefab: {fileID: 8413006565519652491, guid: 60c560f940c7847f18d7352a1cbb7dc6, type: 3}
   star: {fileID: 0}
+  superNova: {fileID: 6954280612468559128, guid: 480d549bf7fdd432f95fdc09da0fb96c, type: 3}
   abort: 0
   baseStarMass: 0
   currentState: 0
