@@ -59,10 +59,17 @@ public class GameManager : MonoBehaviour
 
         Star_Behavior starScript = star.GetComponent<Star_Behavior>();
 
+        star.SetActive(false);
+
+        starScript.firstTime = true;
+
         starScript.currentState = starState.protostar;
 
         starScript.sR.color = newProtoStarColor;
         starScript.solarMass = newStarMass;
+        star.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
+
+        star.SetActive(true);
 
         yield break;
     }

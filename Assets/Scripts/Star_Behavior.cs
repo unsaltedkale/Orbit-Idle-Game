@@ -19,10 +19,16 @@ public class Star_Behavior : MonoBehaviour
     public Color oldColor;
     public Color targetColor;
     public bool firstTime;
+    public float timeOfEachStageSeconds;
+    public float progressOfTheStageSeconds;
+    public Color redGiant = new Color32(204, 65, 0, 255);
+    public Color blueGiant = new Color32(76, 188, 255, 255);
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        timeOfEachStageSeconds = 200;
+
         gm = FindFirstObjectByType<GameManager>();
 
         sR = GetComponent<SpriteRenderer>();
@@ -68,23 +74,105 @@ public class Star_Behavior : MonoBehaviour
         {
             lerpVal = 0;
 
+            progressOfTheStageSeconds = 0;
+
+            oldSize = transform.localScale;
+            float f = CalculateSolarRadiusOfMainSequence();
+            targetSize = new Vector3(f, f, f);
+            oldColor = sR.color;
+            targetColor = CalculateColorOfMainSequence();
+
             firstTime = false;
         }
 
-        int tempValue = new Mathf.Lerp(oldSize.x, targetSize.x, lerpVal);
-        transform.localScale = new Vector3(tempValue, tempValue, 0f);
+        progressOfTheStageSeconds += Time.deltaTime;
+
+        lerpVal = progressOfTheStageSeconds / timeOfEachStageSeconds;
+
+        transform.localScale = Vector3.Lerp(oldSize, targetSize, lerpVal);
 
         sR.color = Color.Lerp(oldColor, targetColor, lerpVal);
+
+        if (progressOfTheStageSeconds >= timeOfEachStageSeconds)
+        {
+            print("Protostar phase ended");
+
+            currentState = GameManager.starState.mainSequence;
+            firstTime = true;
+            
+        }
 
     }
 
     public void MainSequenceUpdate()
     {
+        if (firstTime)
+        {
+
+            oldSize = transform.localScale;
+            float f = CalculateSolarRadiusOfGiant();
+            targetSize = new Vector3(f, f, f);
+
+            oldColor = sR.color;
+            targetColor = CalculateColorOfGiant();
+
+            firstTime = false;
+        }
+
+        progressOfTheStageSeconds += Time.deltaTime;
+
+        lerpVal = progressOfTheStageSeconds / timeOfEachStageSeconds;
+
+        transform.localScale = Vector3.Lerp(oldSize, targetSize, lerpVal);
+
+        sR.color = Color.Lerp(oldColor, targetColor, lerpVal);
+
+        if (progressOfTheStageSeconds >= timeOfEachStageSeconds)
+        {
+            print("Main Sequence phase ended");
+
+            currentState = GameManager.starState.giant;
+            firstTime = true;
+            
+        }
+
+
         
     }
 
     public void GiantUpdate()
     {
+        if (firstTime)
+        {
+
+            oldSize = transform.localScale;
+            float f = oldSize.x + 0.5f;
+            targetSize = new Vector3(f, f, f);
+
+            oldColor = sR.color;
+            targetColor = Color.Lerp(sR.color, Color.black, 0.3f);
+
+            firstTime = false;
+        }
+
+        progressOfTheStageSeconds += Time.deltaTime;
+
+        lerpVal = progressOfTheStageSeconds / timeOfEachStageSeconds;
+
+        transform.localScale = Vector3.Lerp(oldSize, targetSize, lerpVal);
+
+        sR.color = Color.Lerp(oldColor, targetColor, lerpVal);
+
+        if (progressOfTheStageSeconds >= timeOfEachStageSeconds)
+        {
+            print("Giant phase ended");
+
+            currentState = GameManager.starState.giant;
+            firstTime = true;
+            
+        }
+
+
         
     }
 
@@ -103,59 +191,98 @@ public class Star_Behavior : MonoBehaviour
         
     }
 
-    void CalculateStar()
+    public UnityEngine.Color CalculateColorOfMainSequence()
     {
-        solarMass = Mathf.Clamp(solarMass, 0.08f, 20f);
-
-        //solarRadius = ((solarRadiusMax - solarRadiusMin) / (solarMassMax - solarMassMin)) * (solarMass - solarMassMin) + solarRadiusMin;
-
-        solarRadius = Mathf.Pow(solarMass, 0.78f) + 0.25f;
-
-        transform.localScale = new Vector3(solarRadius, solarRadius, solarRadius);
-
-        //add later: lerp the colors of star so it is smooth instead of one or the other.
-        
         if (0.08f <= solarMass && solarMass < 0.45f)
         {
             classLetter = "M";
-            sR.color = Color.red;
+            return Color.red;
         }
 
         else if (0.45f <= solarMass && solarMass < 0.8f)
         {
             classLetter = "K";
-            sR.color = Color.Lerp(Color.red, Color.yellow, 0.5f);
+            return Color.Lerp(Color.red, Color.yellow, 0.5f);
         }
 
         else if (0.8f <= solarMass && solarMass < 1.04)
         {
             classLetter = "G";
-            sR.color = Color.yellow;
+            return Color.yellow;
         }
 
         else if (1.04f <= solarMass && solarMass < 1.4f)
         {
             classLetter = "F";
-            sR.color = Color.white;
+            return Color.white;
         }
 
         else if (1.4f <= solarMass && solarMass < 2.1f)
         {
             classLetter = "A";
-            sR.color = Color.Lerp(Color.white, Color.blue, 0.25f);
+            return Color.Lerp(Color.white, Color.blue, 0.25f);
         }
 
         else if (2.1f <= solarMass && solarMass < 16f)
         {
             classLetter = "B";
-            sR.color = Color.Lerp(Color.white, Color.blue, 0.75f);
+            return Color.Lerp(Color.white, Color.blue, 0.75f);
         }
 
         else if (16f <= solarMass)
         {
             classLetter = "O";
-            sR.color = Color.blue;
+            return Color.blue;
         }
+
+        return new Color(0,0,0,1);
     }
 
+    public UnityEngine.Color CalculateColorOfGiant()
+    {
+        if (solarMass <= 8f)
+        {
+            return redGiant;
+        }
+        
+
+        else if (8f < solarMass)
+        {
+            return blueGiant;
+        }
+
+        return new Color(0,0,0,1);
+    }
+
+    public float CalculateSolarRadiusOfMainSequence()
+    {
+        return Mathf.Pow(solarMass, 0.78f) + 0.25f;
+    }
+
+    public float CalculateSolarRadiusOfGiant()
+    {
+        return (Mathf.Pow(solarMass, 0.78f) + 0.25f)*3f;
+    }
+
+    public GameManager.starState DetermineEndOfLifeStarState()
+    {
+        if (solarMass <= 8f)
+        {
+            return GameManager.starState.whiteDwarf;
+        }
+        
+
+        else if (8f < solarMass && solarMass < 16f)
+        {
+            return GameManager.starState.neutronStar;
+        }
+        
+        else if (16f < solarMass)
+        {
+            return GameManager.starState.blackHole;
+        }
+
+        return new Color(0, 0, 0, 1);
+
+    }
 }
