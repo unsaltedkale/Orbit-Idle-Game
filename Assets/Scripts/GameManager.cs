@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
@@ -7,8 +8,23 @@ public class GameManager : MonoBehaviour
     public List<Color> colorList;
     public List<Color> colorAvailableList;
     public List<GameObject> planetNumbersAvailable;
+    public List<Color> colorProtoStars;
     public GameObject planet;
+    public GameObject starPrefab;
+    public GameObject star;
     public bool abort;
+    public float baseStarMass;
+    public enum starState
+    {
+        protostar,
+        mainSequence,
+        giant,
+        whiteDwarf,
+        neutronStar,
+        blackHole,
+        recycle
+    }
+    public starState currentState;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
@@ -23,10 +39,36 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(this.gameObject);
         }
 
+        baseStarMass = 0.08f;
+
+        currentState = starState.protostar;
+
+        StartCoroutine(StartStar());
+
+    }
+
+    public IEnumerator StartStar()
+    {
+        float newStarMass = Mathf.Clamp(baseStarMass + Random.Range(-0.3f, 0.3f), 0.08f, 30f);
+
+        Color newProtoStarColor = colorProtoStars[Random.Range(0, colorProtoStars.Count)];
+
+        star = Instantiate(starPrefab, new Vector3(0, 0, 0), new Quaternion(0,0,0,0));
+
+        yield return null;
+
+        Star_Behavior starScript = star.GetComponent<Star_Behavior>();
+
+        starScript.currentState = starState.protostar;
+
+        starScript.sR.color = newProtoStarColor;
+        starScript.solarMass = newStarMass;
+
+        yield break;
     }
 
     // Update is called once per frame
-        void Update()
+    void Update()
     {
 
         if (Input.anyKeyDown)

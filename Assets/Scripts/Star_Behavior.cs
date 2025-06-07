@@ -3,54 +3,117 @@ using System.Collections;
 
 public class Star_Behavior : MonoBehaviour
 {
+    public GameManager gm;
     public SpriteRenderer sR;
     public float solarMass;
     public float solarRadius;
-    public float rotationSpeed;
-    public float axisRotation;
     public string classLetter;
     public float solarMassMin = 0.08f;
     public float solarMassMax = 16f;
     public float solarRadiusMin = 0.7f;
     public float solarRadiusMax = 6.6f;
-    public float rotationSpeedMin = 0;
-    public float rotationSpeedMax = 10;
-    public float axisRotationMin = 0;
-    public float axisRotationMax = 360;
+    public GameManager.starState currentState;
+    public float lerpVal;
+    public Vector3 oldSize;
+    public Vector3 targetSize;
+    public Color oldColor;
+    public Color targetColor;
+    public bool firstTime;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        gm = FindFirstObjectByType<GameManager>();
+
         sR = GetComponent<SpriteRenderer>();
-
-        solarMass = (Random.Range(0.45f, 3f));
-
-        CalculateStar();
     }
 
     // Update is called once per frame
     void Update()
     {
-        CalculateStar();
+        if (currentState == GameManager.starState.protostar)
+        {
+            ProtostarUpdate();
+        }
+
+        else if (currentState == GameManager.starState.mainSequence)
+        {
+            MainSequenceUpdate();
+        }
+
+        else if (currentState == GameManager.starState.giant)
+        {
+            GiantUpdate();
+        }
+
+        else if (currentState == GameManager.starState.whiteDwarf)
+        {
+            WhiteDwarfUpdate();
+        }
+
+        else if (currentState == GameManager.starState.neutronStar)
+        {
+            NeutronStarUpdate();
+        }
+        
+        else if (currentState == GameManager.starState.blackHole)
+        {
+            BlackHoleUpdate();
+        }
+    }
+
+    public void ProtostarUpdate()
+    {
+        if (firstTime)
+        {
+            lerpVal = 0;
+
+            firstTime = false;
+        }
+
+        int tempValue = new Mathf.Lerp(oldSize.x, targetSize.x, lerpVal);
+        transform.localScale = new Vector3(tempValue, tempValue, 0f);
+
+        sR.color = Color.Lerp(oldColor, targetColor, lerpVal);
+
+    }
+
+    public void MainSequenceUpdate()
+    {
+        
+    }
+
+    public void GiantUpdate()
+    {
+        
+    }
+
+    public void WhiteDwarfUpdate()
+    {
+        
+    }
+
+    public void NeutronStarUpdate()
+    {
+        
+    }
+
+    public void BlackHoleUpdate()
+    {
+        
     }
 
     void CalculateStar()
     {
-        solarMass = Mathf.Clamp(solarMass, 0.01f, 20f);
+        solarMass = Mathf.Clamp(solarMass, 0.08f, 20f);
 
         //solarRadius = ((solarRadiusMax - solarRadiusMin) / (solarMassMax - solarMassMin)) * (solarMass - solarMassMin) + solarRadiusMin;
 
-        solarRadius = (Mathf.Pow(solarMass, 0.78f) + 0.25f);
+        solarRadius = Mathf.Pow(solarMass, 0.78f) + 0.25f;
 
         transform.localScale = new Vector3(solarRadius, solarRadius, solarRadius);
 
         //add later: lerp the colors of star so it is smooth instead of one or the other.
-
-        if (solarMass < 0.08f)
-        {
-            classLetter = "L";
-            sR.color = Color.Lerp(Color.red, Color.grey, 0.6f);
-        }
         
         if (0.08f <= solarMass && solarMass < 0.45f)
         {

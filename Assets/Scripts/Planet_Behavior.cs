@@ -5,7 +5,7 @@ using TMPro;
 
 public class Planet_Behavior : MonoBehaviour
 {
-
+    public GameManager gm;
     public GameObject star;
     public float orbitSpeed;
     public float rotationSpeed;
@@ -15,26 +15,18 @@ public class Planet_Behavior : MonoBehaviour
     public float r; 
     public float o; //clickDistance
     public float d; //radiusVar
-    public float l1; //xintercept
-    public float z1; //yintercept
     public float a; //horizontalstretch
     public float b; //vertical stretch
-    public float g1; //finalDilation
     public float theta; //c
     public Vector3 tangentIntersect;
     public float v1;
     public float v2;
-    /*public float v3;
-    public float v4;
-    public float v5;
-    public float v6;*/
     public LineRenderer lR;
     public TrailRenderer tR;
     public bool startingPlanet;
     public Vector3 vectorHold;
     public bool hasHitIntersect;
     public float solarMass;
-    public GameManager gm;
     public int key;
     public TextMeshProUGUI namePlate;
     public Vector3 offset;
@@ -88,7 +80,6 @@ public class Planet_Behavior : MonoBehaviour
             StartCoroutine(startPlanet());
         }
 
-        //mousePos = (Input.mousePosition) - new Vector3(Screen.width / 2, Screen.height / 2, 0);
         Vector3 temp = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y));
         temp.z = 0f;
         mousePos = temp;
@@ -159,14 +150,6 @@ public class Planet_Behavior : MonoBehaviour
 
                 v2 = d * b * Mathf.Cos(theta);
 
-                //v3 = ((l1 * Mathf.Sin(theta)) / g1);
-
-                //v4 = ((d / g1) * (o / l1) * Mathf.Cos(theta));
-
-                //v5 = (v1 + v3) / 2;
-
-                //v6 = (v2 + v4) / 2;
-
                 transform.position = new Vector3(v1, v2, 0f);
             }
 
@@ -219,10 +202,6 @@ public class Planet_Behavior : MonoBehaviour
 
         o = Mathf.Sqrt((Mathf.Pow(h.x - j.x, 2)) + (Mathf.Pow(h.y - j.y, 2)));
 
-        l1 = ((-j.y) * ((j.x - h.x) / (j.y - h.y))) + j.x;
-
-        //a = o / l1;
-
         a = Mathf.Abs(o * (1/(d * d)));
 
         if (a < 1)
@@ -230,11 +209,7 @@ public class Planet_Behavior : MonoBehaviour
             a = 1/a;
         }
 
-        //b = l1 / d;
-
         b = 1;
-
-        g1 = 1;
 
         tangentIntersect = new Vector3(h.y, 0f, 0f);
 
@@ -248,14 +223,6 @@ public class Planet_Behavior : MonoBehaviour
         v1 = d * a * Mathf.Sin(theta);
 
         v2 = d * b * Mathf.Cos(theta);
-
-        //v3 = ((l1 * Mathf.Sin(theta)) / g1);
-
-        //v4 = ((d / g1) * (o / l1) * Mathf.Cos(theta));
-
-        //v5 = (v1 + v3) / 2;
-
-        //v6 = (v2 + v4) / 2;
 
         orbitSpeed = Mathf.Pow(o,3/2);
 
