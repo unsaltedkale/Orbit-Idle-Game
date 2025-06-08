@@ -19,7 +19,7 @@ public class SuperNova_Behavior : MonoBehaviour
 
         oldSize = transform.localScale;
 
-        float i = 30f;
+        float i = 100f;
 
         targetSize = new Vector3(i, i, i);
 

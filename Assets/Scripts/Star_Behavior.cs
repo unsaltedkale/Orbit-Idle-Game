@@ -27,7 +27,7 @@ public class Star_Behavior : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        timeOfEachStageSeconds = 60;
+        timeOfEachStageSeconds = 10;
 
         gm = FindFirstObjectByType<GameManager>();
 
@@ -115,11 +115,8 @@ public class Star_Behavior : MonoBehaviour
             progressOfTheStageSeconds = 0;
 
             oldSize = transform.localScale;
-            float f = CalculateSolarRadiusOfGiant();
+            float f = CalculateSolarRadiusOfGiant()/2;
             targetSize = new Vector3(f, f, f);
-
-            oldColor = sR.color;
-            targetColor = CalculateColorOfGiant();
 
             firstTime = false;
         }
@@ -130,8 +127,6 @@ public class Star_Behavior : MonoBehaviour
 
         transform.localScale = Vector3.Lerp(oldSize, targetSize, lerpVal);
 
-        sR.color = Color.Lerp(oldColor, targetColor, lerpVal);
-
         if (progressOfTheStageSeconds >= timeOfEachStageSeconds)
         {
             print("Main Sequence phase ended");
@@ -141,8 +136,6 @@ public class Star_Behavior : MonoBehaviour
             
         }
 
-
-        
     }
 
     public void GiantUpdate()
@@ -154,11 +147,11 @@ public class Star_Behavior : MonoBehaviour
             progressOfTheStageSeconds = 0;
 
             oldSize = transform.localScale;
-            float f = oldSize.x + 0.5f;
+            float f = CalculateSolarRadiusOfGiant();
             targetSize = new Vector3(f, f, f);
 
             oldColor = sR.color;
-            targetColor = Color.Lerp(sR.color, Color.black, 0.3f);
+            targetColor = CalculateColorOfGiant();
 
             firstTime = false;
         }
@@ -199,7 +192,7 @@ public class Star_Behavior : MonoBehaviour
 
             firstTime = false;
 
-            gm.SuperNovaExplosion();
+            gm.SuperNovaExplosion(false);
         }
 
         progressOfTheStageSeconds += Time.deltaTime;
@@ -210,12 +203,14 @@ public class Star_Behavior : MonoBehaviour
 
         sR.color = Color.Lerp(oldColor, targetColor, lerpVal);
 
-        if (progressOfTheStageSeconds >= timeOfEachStageSeconds)
+        if (progressOfTheStageSeconds >= 10f)
         {
             print("Waiting For Recycle after WhiteDwarf");
 
             currentState = GameManager.starState.waitingForRecycle;
             firstTime = true;
+
+            StartCoroutine(gm.RecycleStarProcess());
             
         }
 
@@ -237,7 +232,7 @@ public class Star_Behavior : MonoBehaviour
 
             firstTime = false;
 
-            gm.SuperNovaExplosion();
+            gm.SuperNovaExplosion(false);
         }
 
         progressOfTheStageSeconds += Time.deltaTime;
@@ -254,6 +249,8 @@ public class Star_Behavior : MonoBehaviour
 
             currentState = GameManager.starState.waitingForRecycle;
             firstTime = true;
+
+            StartCoroutine(gm.RecycleStarProcess());
             
         }
         
@@ -275,7 +272,7 @@ public class Star_Behavior : MonoBehaviour
 
             firstTime = false;
 
-            gm.SuperNovaExplosion();
+            gm.SuperNovaExplosion(false);
         }
 
         progressOfTheStageSeconds += Time.deltaTime;
@@ -292,6 +289,8 @@ public class Star_Behavior : MonoBehaviour
 
             currentState = GameManager.starState.waitingForRecycle;
             firstTime = true;
+
+            StartCoroutine(gm.RecycleStarProcess());
             
         }
         

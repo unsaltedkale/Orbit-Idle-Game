@@ -76,6 +76,43 @@ public class GameManager : MonoBehaviour
         yield break;
     }
 
+    public IEnumerator RecycleStarProcess()
+    {
+        print("Waiting for spacebar");
+
+        yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space));
+
+        foreach (GameObject p in planetNumbersAvailable)
+        {
+            if (p != null)
+            {
+                Planet_Behavior pS = p.GetComponent<Planet_Behavior>();
+
+                pS.decayOrbit = true;
+            }
+        }
+            
+
+        yield return new WaitUntil(() => GameObject.FindWithTag("Planet") == false);
+
+        Destroy(star);
+
+        baseStarMass += 0.5f;
+
+        SuperNovaExplosion(true);
+
+        StartCoroutine(StartStar());
+
+        yield break;
+
+    }
+
+    public void addToStarRadius(float i)
+    {
+        star.transform.localScale += new Vector3(i, i, i);
+
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -84,7 +121,7 @@ public class GameManager : MonoBehaviour
         {
             int k = 0;
 
-            for (int i = 1; i < 9; i++)
+            for (int i = 1; i < 10; i++)
             {
                 if (Input.GetKeyDown("" + i.ToString()))
                 {
@@ -146,9 +183,15 @@ public class GameManager : MonoBehaviour
         return d;
     }
 
-    public void SuperNovaExplosion()
+    public void SuperNovaExplosion(bool b)
     {
         GameObject s = Instantiate(superNova);
         s.transform.position = new Vector3(0, 0, 0);
+
+        if (b)
+        {    
+            s.GetComponent<SuperNova_Behavior>().color1 = new Color32(253, 255, 153, 255);
+            s.GetComponent<SuperNova_Behavior>().color2 = new Color32(170, 104, 224, 0);
+        }
     }
 }

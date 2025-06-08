@@ -29,6 +29,8 @@ public class Planet_Behavior : MonoBehaviour
     public int key;
     public TextMeshProUGUI namePlate;
     public Vector3 offset;
+    public bool decayOrbit;
+    public static bool enabledStart = true;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -65,29 +67,47 @@ public class Planet_Behavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            enabledStart = !enabledStart;
+            namePlate.enabled = enabledStart;
+        }
 
         Vector3 roll = Camera.main.WorldToScreenPoint(transform.position + offset);
         roll.z = 0f;
         namePlate.transform.position = roll;
 
-        if (startingPlanet == false && Input.GetKeyDown("" + key.ToString()))
+        //comment back in to add repositioning planets
+
+        /*if (startingPlanet == false && Input.GetKeyDown("" + key.ToString()))
         {
             startingPlanet = true;
             hasHitIntersect = false;
             lR.enabled = false;
             tR.enabled = false;
             StartCoroutine(startPlanet());
-        }
+        }*/
 
         Vector3 temp = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y));
         temp.z = 0f;
         mousePos = temp;
 
+        if (decayOrbit == true)
+        {
+            d -= Time.deltaTime;
+
+            if (d <= 0)
+            {
+                gm.addToStarRadius(0.4f);
+                Destroy(gameObject);
+            }
+        }
+
 
         if (lR.enabled == true)
-        {
-            lR.SetPosition(1, new Vector3(mousePos.x, h.y, 0));
-        }
+            {
+                lR.SetPosition(1, new Vector3(mousePos.x, h.y, 0));
+            }
 
         if (tR.enabled == true && hasHitIntersect == false)
         {
@@ -126,7 +146,8 @@ public class Planet_Behavior : MonoBehaviour
                 {
                     tempR = 1;
                 }
-                //orbitSpeed = Mathf.Clamp(orbitSpeed, 0, 0.8f/Mathf.Abs(r));
+
+                orbitSpeed = Mathf.Clamp(orbitSpeed, 0, 2);
             }
         }
 
@@ -156,7 +177,7 @@ public class Planet_Behavior : MonoBehaviour
 
     public IEnumerator startPlanet()
     {
-        yield return  null;
+        yield return null;
 
         startingPlanet = true;
         //first click
