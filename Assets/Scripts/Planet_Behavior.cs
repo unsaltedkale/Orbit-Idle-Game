@@ -30,7 +30,6 @@ public class Planet_Behavior : MonoBehaviour
     public TextMeshProUGUI namePlate;
     public Vector3 offset;
     public bool decayOrbit;
-    public static bool enabledStart = true;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -67,11 +66,6 @@ public class Planet_Behavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            enabledStart = !enabledStart;
-            namePlate.enabled = enabledStart;
-        }
 
         Vector3 roll = Camera.main.WorldToScreenPoint(transform.position + offset);
         roll.z = 0f;
@@ -212,6 +206,11 @@ public class Planet_Behavior : MonoBehaviour
 
     public IEnumerator calculateOrbit()
     {
+        if (h.x - j.x == 0)
+        {
+            j.x = j.x + ((-1 * j.x / Mathf.Abs(j.x)) * 0.1f);
+        }
+
         j = new Vector3 (j.x, 0f, 0f);
 
         r = Mathf.Sqrt((Mathf.Pow(h.x, 2)) + (Mathf.Pow(h.y, 2)));

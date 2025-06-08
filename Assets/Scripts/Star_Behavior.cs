@@ -27,7 +27,7 @@ public class Star_Behavior : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        timeOfEachStageSeconds = 10;
+        timeOfEachStageSeconds = 60;
 
         gm = FindFirstObjectByType<GameManager>();
 

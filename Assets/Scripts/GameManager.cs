@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
         recycle
     }
     public starState currentState;
+    public bool enabledStart;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
@@ -116,6 +117,18 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            enabledStart = !enabledStart;
+
+            foreach (GameObject b in planetNumbersAvailable)
+            {
+                if (b != null)
+                {
+                    b.GetComponent<Planet_Behavior>().namePlate.enabled = enabledStart;
+                }
+            }
+        }
 
         if (Input.anyKeyDown)
         {
@@ -159,6 +172,7 @@ public class GameManager : MonoBehaviour
                     planetNumbersAvailable[k - 1] = p;
 
                     p.GetComponent<Planet_Behavior>().key = k;
+                    p.GetComponent<Planet_Behavior>().namePlate.enabled = enabledStart;
                 }
             }
         }

@@ -276,7 +276,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.08343715, g: 0.105559915, b: 0.14150941, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -648,7 +648,7 @@ MonoBehaviour:
   - {r: 1, g: 1, b: 0, a: 1}
   - {r: 0, g: 1, b: 0, a: 1}
   - {r: 0, g: 1, b: 1, a: 1}
-  - {r: 0, g: 0, b: 1, a: 1}
+  - {r: 0.43867922, g: 0.43867922, b: 1, a: 1}
   - {r: 1, g: 0, b: 1, a: 1}
   - {r: 0.7738624, g: 0.6462264, b: 1, a: 1}
   colorAvailableList: []
@@ -665,7 +665,7 @@ MonoBehaviour:
   colorProtoStars:
   - {r: 0.60929155, g: 0.7924528, b: 0.6576738, a: 1}
   - {r: 0.8867924, g: 0.497775, b: 0.87212545, a: 1}
-  - {r: 0.58939433, g: 0.31746176, b: 0.7735849, a: 1}
+  - {r: 0.6332095, g: 0.48967603, b: 0.7924528, a: 1}
   planet: {fileID: 8184354833867868453, guid: 53339866ac6ea451bbda86986231e0fa, type: 3}
   starPrefab: {fileID: 8413006565519652491, guid: 60c560f940c7847f18d7352a1cbb7dc6, type: 3}
   star: {fileID: 0}
@@ -673,6 +673,7 @@ MonoBehaviour:
   abort: 0
   baseStarMass: 0
   currentState: 0
+  enabledStart: 0
 --- !u!1 &1443786471
 GameObject:
   m_ObjectHideFlags: 0
