@@ -10,10 +10,12 @@
 # 🌌☀️🪐 Orbit: A Background Idle Game
 
 
+https://github.com/user-attachments/assets/cba67ea2-addf-4e47-bd2b-a4fd7dc30fe3
 
-https://github.com/user-attachments/assets/48f7f3c9-36f3-40c7-8fd2-46c1651e7c3f
 
-###### A video of the alpha version of Orbit. The user slowly zooms out using a zoom slider on the right side, showing many differently-colored planets that all orbit at different speeds and distances around a blue star.
+###### A video of the beta version of Orbit. The user throws planets that orbit around a red star, and then slowly zooms out to show the created solar system.
+
+### [Want to play the beta version? Click here to see how](https://github.com/unsaltedkale/Orbit-Idle-Game/edit/main/README.md#how-to-play-orbit-windows-only-currently).
 
 ## What is Orbit?
 
@@ -55,6 +57,47 @@ Orbit, due to being about astronomy, planets, and orbital mechanics, has taken a
 * Binary or trinary planet systems!
 
 🌟 And rare chance some familar planets might wander in for you to rehome...  
+
+## How to play Orbit (Windows Only Currently)
+
+To play Windows v0.06.08.1-beta (current version), you will have to go through the steps of downloading it off DropBox, decompressing the files, and then running it anyways even if Windows doesn't want you too. I will try to have it as a WebGL version soon so you don't have to have a risk of downloading random things off the internet.
+
+1. [Go to this link](https://www.dropbox.com/scl/fi/fu52twtodeq02c701odmi/Windows-Orbit-v0.06.08.1-beta.zip?rlkey=2h2igngb49p8g42vlr1tt7b1i&st=2mf1fpw5&dl=0) and press the download button in the top right corner to download the folder as a Compressed (zipped) folder. (It should be the default option)
+
+![Screen Shot 2025-06-08 at 1 22 09 PM](https://github.com/user-attachments/assets/0a787ce1-4cab-485a-a77d-02801aeed47e)
+
+![screenshot 2025-6-1](https://github.com/user-attachments/assets/e57bfe3a-4bd7-4bd8-8a35-671fcf873b5d)
+
+2. Once the folder is completely downloaded, right click on the folder and press **Extract All**
+
+![Screenshot 2025-6-2](https://github.com/user-attachments/assets/a9b46326-a50d-4b47-8d99-36665288c022)
+
+3. Select where you want the game to be or just press **Extract** to save it in the same place where the zip file already is.
+
+![Screenshot 2025-6-3](https://github.com/user-attachments/assets/fb5721e6-ae6b-4932-99fe-05288210cdfd)
+
+4. A new folder will appear that is a _File Folder_ instead of a _Compressed (zipped) folder_. Go into that folder.
+
+![Screenshot 2025-6-4](https://github.com/user-attachments/assets/615ad829-d2ea-4855-92e9-3306640394de)
+
+5. Go into the folder labeled **Windows Orbit v0.06.08.1-beta**.
+
+![Screenshot 2025-6-5](https://github.com/user-attachments/assets/8479e8a1-878a-484c-8df9-75a3c4ff34d4)
+
+6. Right click **Orbit-Idle-Game** and select _Open_.
+
+![Screenshot 2025-6-6](https://github.com/user-attachments/assets/43fd6d33-3f4c-42a4-8325-834ccbb424bf)
+
+7. A window will appear saying that Windows knows better than you. Press _More info_
+
+![Screenshot 2025-6-7](https://github.com/user-attachments/assets/b7020339-7ef5-4b23-bce1-9c9fba2556b5)
+
+8. A new button will appear called **Run anyway**. Press it.
+
+![Screenshot 2025-6-8](https://github.com/user-attachments/assets/2c2b71c7-4ffc-4069-a825-9cf48b1b04a0)
+
+9. Your game should be running! Yay!!!
+
 
 [^1]: Minimal Viable Product
 [^2]: Elipses my beloathed 😞💔 
