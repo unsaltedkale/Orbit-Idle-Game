@@ -15,7 +15,7 @@ https://github.com/user-attachments/assets/cba67ea2-addf-4e47-bd2b-a4fd7dc30fe3
 
 ###### A video of the beta version of Orbit. The user throws planets that orbit around a red star, and then slowly zooms out to show the created solar system.
 
-### [Want to play the beta version? Click here to see how](https://github.com/unsaltedkale/Orbit-Idle-Game/edit/main/README.md#how-to-play-orbit-windows-only-currently).
+### [Want to play the beta version? Click here to see how](https://github.com/unsaltedkale/Orbit-Idle-Game?tab=readme-ov-file#how-to-play-orbit-windows-only-currently)).
 
 ## What is Orbit?
 
