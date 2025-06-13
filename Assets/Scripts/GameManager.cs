@@ -5,8 +5,7 @@ using System.Collections.Generic;
 public class GameManager : MonoBehaviour
 {
     public static GameManager gm;
-    public List<Color> colorList;
-    public List<Color> colorAvailableList;
+    public List<PlanetData> planetDataList;
     public List<GameObject> planetNumbersAvailable;
     public List<Color> colorProtoStars;
     public GameObject planet;
@@ -163,6 +162,8 @@ public class GameManager : MonoBehaviour
                 {
                     GameObject p = Instantiate(planet);
 
+                    p.GetComponent<Planet_Behavior>().key = k;
+
                     Vector3 temp = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y));
                     temp.z = 0f;
                     Vector3 mP = temp;
@@ -171,16 +172,16 @@ public class GameManager : MonoBehaviour
 
                     planetNumbersAvailable[k - 1] = p;
 
-                    p.GetComponent<Planet_Behavior>().key = k;
                     p.GetComponent<Planet_Behavior>().namePlate.enabled = enabledStart;
                 }
             }
         }
     }
 
-    public Color requestColor()
+    public Color requestColor(int i)
     {
-        if (colorAvailableList.Count == 0)
+        return planetDataList[i - 1].color;
+        /*if (colorAvailableList.Count == 0)
         {
             foreach (Color c in colorList)
             {
@@ -192,9 +193,11 @@ public class GameManager : MonoBehaviour
 
         Color d = colorAvailableList[i];
 
-        colorAvailableList.RemoveAt(i);
-
-        return d;
+        colorAvailableList.RemoveAt(i);*/
+    }
+    public Sprite requestSprite(int i)
+    {
+        return planetDataList[i - 1].sprite;
     }
 
     public void SuperNovaExplosion(bool b)
@@ -203,7 +206,7 @@ public class GameManager : MonoBehaviour
         s.transform.position = new Vector3(0, 0, 0);
 
         if (b)
-        {    
+        {
             s.GetComponent<SuperNova_Behavior>().color1 = new Color32(253, 255, 153, 255);
             s.GetComponent<SuperNova_Behavior>().color2 = new Color32(170, 104, 224, 0);
         }

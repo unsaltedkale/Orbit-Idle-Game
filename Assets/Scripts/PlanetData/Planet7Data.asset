@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9c2a7054ad4349c78167a846769a255, type: 3}
+  m_Name: Planet7Data
+  m_EditorClassIdentifier: 
+  sprite: {fileID: 5327261893239730755, guid: ec69f1df695354ae58704609f62fffc3, type: 3}
+  color: {r: 0.43529412, g: 0.24705882, b: 0.24705882, a: 1}

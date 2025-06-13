@@ -42,11 +42,11 @@ public class Planet_Behavior : MonoBehaviour
 
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
 
-        Color c = gm.requestColor();
+        Color c = gm.requestColor(key);
 
         Color t = c - new Color(0, 0, 0, 1);
 
-        spriteRenderer.color = c;
+        spriteRenderer.sprite = gm.requestSprite(key);
 
         lR.startColor = t;
         lR.endColor = c;
@@ -90,7 +90,7 @@ public class Planet_Behavior : MonoBehaviour
         {
             d -= Time.deltaTime;
 
-            if (d <= 0)
+            if (Vector3.Distance(transform.position, new Vector3(0,0,0)) < 0.05f)
             {
                 gm.addToStarRadius(0.4f);
                 Destroy(gameObject);

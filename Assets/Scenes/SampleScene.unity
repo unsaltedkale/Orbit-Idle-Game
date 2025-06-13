@@ -642,16 +642,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48d0112d746e845feaf4c69bd83c379f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colorList:
-  - {r: 1, g: 0, b: 0, a: 1}
-  - {r: 1, g: 0.53333336, b: 0, a: 1}
-  - {r: 1, g: 1, b: 0, a: 1}
-  - {r: 0, g: 1, b: 0, a: 1}
-  - {r: 0, g: 1, b: 1, a: 1}
-  - {r: 0.43867922, g: 0.43867922, b: 1, a: 1}
-  - {r: 1, g: 0, b: 1, a: 1}
-  - {r: 0.7738624, g: 0.6462264, b: 1, a: 1}
-  colorAvailableList: []
+  planetDataList:
+  - {fileID: 11400000, guid: 843c19df176ac49918ec1f3749f6b8bc, type: 2}
+  - {fileID: 11400000, guid: 5a66bc50f97f84bc0aa44f0e1dd9c003, type: 2}
+  - {fileID: 11400000, guid: 7e2954ad4bae04c3fb4e43974f45a371, type: 2}
+  - {fileID: 11400000, guid: 321750c9618a64fb9ba01b9a68f884e0, type: 2}
+  - {fileID: 11400000, guid: c7d665cefb3c143699f1f45db3462ebb, type: 2}
+  - {fileID: 11400000, guid: f5a36a735918d4e7591165d08f3c4a8b, type: 2}
+  - {fileID: 11400000, guid: a249f4c049e49461ea088d5027affc25, type: 2}
+  - {fileID: 11400000, guid: a8ccdb3103afb439d87f8d7cb63bd4c0, type: 2}
+  - {fileID: 11400000, guid: c1c131df79a6b4c99a2b9f349ed2bd9d, type: 2}
   planetNumbersAvailable:
   - {fileID: 0}
   - {fileID: 0}

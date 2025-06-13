@@ -23,6 +23,9 @@ public class Star_Behavior : MonoBehaviour
     public float progressOfTheStageSeconds;
     public Color redGiant = new Color32(204, 65, 0, 255);
     public Color blueGiant = new Color32(76, 188, 255, 255);
+    public Sprite starSize1;
+    public Sprite starSize2;
+    public Sprite starSize3;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -72,6 +75,7 @@ public class Star_Behavior : MonoBehaviour
     {
         if (firstTime)
         {
+            sR.sprite = starSize1;
             
             lerpVal = 0;
             progressOfTheStageSeconds = 0;
@@ -110,6 +114,7 @@ public class Star_Behavior : MonoBehaviour
     {
         if (firstTime)
         {
+            sR.sprite = starSize2;
             
             lerpVal = 0;
             progressOfTheStageSeconds = 0;
@@ -142,6 +147,7 @@ public class Star_Behavior : MonoBehaviour
     {
         if (firstTime)
         {
+            sR.sprite = starSize3;
             
             lerpVal = 0;
             progressOfTheStageSeconds = 0;
@@ -179,6 +185,7 @@ public class Star_Behavior : MonoBehaviour
     {
         if (firstTime)
         {
+            sR.sprite = starSize1;
 
             lerpVal = 0;
             progressOfTheStageSeconds = 0;
@@ -220,6 +227,8 @@ public class Star_Behavior : MonoBehaviour
     {
         if (firstTime)
         {
+            sR.sprite = starSize3;
+            
             lerpVal = 0;
             progressOfTheStageSeconds = 0;
 
@@ -243,7 +252,7 @@ public class Star_Behavior : MonoBehaviour
 
         sR.color = Color.Lerp(oldColor, targetColor, lerpVal);
 
-        if (progressOfTheStageSeconds >= timeOfEachStageSeconds)
+        if (progressOfTheStageSeconds >= 10f)
         {
             print("Waiting For Recycle after Neutron Star");
 
@@ -283,7 +292,7 @@ public class Star_Behavior : MonoBehaviour
 
         sR.color = Color.Lerp(oldColor, targetColor, lerpVal);
 
-        if (progressOfTheStageSeconds >= timeOfEachStageSeconds)
+        if (progressOfTheStageSeconds >= 10f)
         {
             print("Waiting For Recycle after BlackHole");
 
