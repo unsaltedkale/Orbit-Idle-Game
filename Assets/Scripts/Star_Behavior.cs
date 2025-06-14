@@ -26,6 +26,9 @@ public class Star_Behavior : MonoBehaviour
     public Sprite starSize1;
     public Sprite starSize2;
     public Sprite starSize3;
+    public Sprite whiteDwarf;
+    public Sprite neutronStar;
+    public Sprite blackHole;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -185,17 +188,17 @@ public class Star_Behavior : MonoBehaviour
     {
         if (firstTime)
         {
-            sR.sprite = starSize1;
+            sR.sprite = whiteDwarf;
 
             lerpVal = 0;
             progressOfTheStageSeconds = 0;
 
             oldSize = transform.localScale;
-            float f = 0.2f;
+            float f = 1f;
             targetSize = new Vector3(f, f, f);
 
             oldColor = sR.color;
-            targetColor = Color.Lerp(Color.white, Color.grey, 0.1f);
+            targetColor = Color.white;
 
             firstTime = false;
 
@@ -209,6 +212,11 @@ public class Star_Behavior : MonoBehaviour
         transform.localScale = Vector3.Lerp(oldSize, targetSize, lerpVal);
 
         sR.color = Color.Lerp(oldColor, targetColor, lerpVal);
+        
+        if (progressOfTheStageSeconds >= 2f && sR.sprite != whiteDwarf)
+        {
+            sR.sprite = whiteDwarf;
+        }
 
         if (progressOfTheStageSeconds >= 10f)
         {
@@ -218,7 +226,7 @@ public class Star_Behavior : MonoBehaviour
             firstTime = true;
 
             StartCoroutine(gm.RecycleStarProcess());
-            
+
         }
 
     }
@@ -233,11 +241,11 @@ public class Star_Behavior : MonoBehaviour
             progressOfTheStageSeconds = 0;
 
             oldSize = transform.localScale;
-            float f = 0.1f;
+            float f = 1f;
             targetSize = new Vector3(f, f, f);
 
             oldColor = sR.color;
-            targetColor = Color.Lerp(Color.white, Color.blue, 0.1f);
+            targetColor = Color.white;
 
             firstTime = false;
 
@@ -251,6 +259,11 @@ public class Star_Behavior : MonoBehaviour
         transform.localScale = Vector3.Lerp(oldSize, targetSize, lerpVal);
 
         sR.color = Color.Lerp(oldColor, targetColor, lerpVal);
+        
+        if (progressOfTheStageSeconds >= 2f && sR.sprite != neutronStar)
+        {
+            sR.sprite = neutronStar;
+        }
 
         if (progressOfTheStageSeconds >= 10f)
         {
@@ -260,7 +273,7 @@ public class Star_Behavior : MonoBehaviour
             firstTime = true;
 
             StartCoroutine(gm.RecycleStarProcess());
-            
+
         }
         
     }
@@ -273,11 +286,11 @@ public class Star_Behavior : MonoBehaviour
             progressOfTheStageSeconds = 0;
 
             oldSize = transform.localScale;
-            float f = 0.2f;
+            float f = 1f;
             targetSize = new Vector3(f, f, f);
 
             oldColor = sR.color;
-            targetColor = Color.black;
+            targetColor = Color.white;
 
             firstTime = false;
 
@@ -292,6 +305,11 @@ public class Star_Behavior : MonoBehaviour
 
         sR.color = Color.Lerp(oldColor, targetColor, lerpVal);
 
+        if (progressOfTheStageSeconds >= 2f && sR.sprite != blackHole)
+        {
+            sR.sprite = blackHole;
+        }
+
         if (progressOfTheStageSeconds >= 10f)
         {
             print("Waiting For Recycle after BlackHole");
@@ -300,7 +318,7 @@ public class Star_Behavior : MonoBehaviour
             firstTime = true;
 
             StartCoroutine(gm.RecycleStarProcess());
-            
+
         }
         
     }

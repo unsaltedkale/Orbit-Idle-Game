@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: -4388899747337525858, guid: a2a804de07b4e4dc59dff71d68ba3d00, type: 3}
   m_Color: {r: 1, g: 1, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -123,3 +123,6 @@ MonoBehaviour:
   starSize1: {fileID: 8078897041468352302, guid: 2e03082f8575a437a93e7d85e8f1b535, type: 3}
   starSize2: {fileID: -4388899747337525858, guid: a2a804de07b4e4dc59dff71d68ba3d00, type: 3}
   starSize3: {fileID: 5931842347579807508, guid: 0052dab51587048c898351795e387b99, type: 3}
+  whiteDwarf: {fileID: 6216831003021151245, guid: 99cc55eaa89a942aa863e2074a776d79, type: 3}
+  neutronStar: {fileID: 950426285135314130, guid: 2e700950e837a473d91c0952ba1d5265, type: 3}
+  blackHole: {fileID: -1391019400752181970, guid: 894056694b67e4ac1a8ab10ed2e648d0, type: 3}
