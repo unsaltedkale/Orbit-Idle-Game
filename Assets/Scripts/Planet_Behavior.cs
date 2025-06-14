@@ -88,9 +88,17 @@ public class Planet_Behavior : MonoBehaviour
 
         if (decayOrbit == true)
         {
-            d -= Time.deltaTime;
+            if (d < 0.1f)
+            {
+                d = 0;
+            }
 
-            if (Vector3.Distance(transform.position, new Vector3(0,0,0)) < 0.05f)
+            else
+            {
+                d -= Time.deltaTime;
+            }
+
+            if (Vector3.Distance(transform.position, new Vector3(0, 0, 0)) < 0.05f)
             {
                 gm.addToStarRadius(0.4f);
                 Destroy(gameObject);
