@@ -282,12 +282,12 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: 5ff85e26f76a1451da62023e3da6457e, type: 3}
+  m_audioClip: {fileID: 8300000, guid: d615c6232154d4057b829e123163c0a5, type: 3}
+  m_Resource: {fileID: 8300000, guid: d615c6232154d4057b829e123163c0a5, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -469,9 +469,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1867558296}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
+  m_MaxValue: 1.5
   m_WholeNumbers: 0
-  m_Value: 0.6
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -514,8 +514,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: 5ff85e26f76a1451da62023e3da6457e, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 473fb4522c2304b7cb2bae4a510664e6, type: 3}
+  m_Resource: {fileID: 8300000, guid: 473fb4522c2304b7cb2bae4a510664e6, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -912,7 +912,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: -6564198633328856824, guid: 89c25434af9eb42b0b016c8e180b5be3, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -1368,7 +1368,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 3396025333687627425, guid: 2ef6e20b1a6f644a792580cbe3676b42, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -2011,9 +2011,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1570052770}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
+  m_MaxValue: 1.5
   m_WholeNumbers: 0
-  m_Value: 0.6
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -2070,6 +2070,8 @@ MonoBehaviour:
   musicOffIcon: {fileID: -6102723603575992560, guid: 1f4c45a2031ef45149a7bd1814eba2ed, type: 3}
   sfxOnIcon: {fileID: 3396025333687627425, guid: 2ef6e20b1a6f644a792580cbe3676b42, type: 3}
   sfxOffIcon: {fileID: -5897669707306498074, guid: 3944ac2b0e4974f43bd7743b03b55019, type: 3}
+  baseMusicVolume: 0.7
+  baseSFXVolume: 0.5
 --- !u!4 &1408918131
 Transform:
   m_ObjectHideFlags: 0
@@ -2194,7 +2196,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1000, y: 407}
+  m_AnchoredPosition: {x: 980, y: 407}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1508918085
@@ -2552,7 +2554,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 436, y: 407}
+  m_AnchoredPosition: {x: 409, y: 407}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1884692644

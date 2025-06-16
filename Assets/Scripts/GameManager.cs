@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -27,6 +28,10 @@ public class GameManager : MonoBehaviour
     }
     public starState currentState;
     public bool enabledStart;
+    public Camera_Behavior camera_Behavior;
+    public AudioPlayer_Behavior audioPlayer_Behavior;
+    public bool isUIOpen;
+    public TextMeshProUGUI uiHelpTipText;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
@@ -44,6 +49,8 @@ public class GameManager : MonoBehaviour
         baseStarMass = 0.08f;
 
         currentState = starState.protostar;
+
+        isUIOpen = true;
 
         StartCoroutine(StartStar());
 
@@ -103,6 +110,8 @@ public class GameManager : MonoBehaviour
 
         StartCoroutine(StartStar());
 
+        audioPlayer_Behavior.restartMusic();
+
         yield break;
 
     }
@@ -129,53 +138,65 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        if (Input.anyKeyDown)
+        if (Input.GetKeyDown(KeyCode.W))
         {
-            int k = 0;
+            isUIOpen = !isUIOpen;
 
-            for (int i = 1; i < 10; i++)
+            camera_Behavior.hide(isUIOpen);
+
+            audioPlayer_Behavior.hide(isUIOpen);
+
+            uiHelpTipText.enabled = isUIOpen;
+            
+        }
+
+        if (Input.anyKeyDown)
             {
-                if (Input.GetKeyDown("" + i.ToString()))
-                {
-                    k = i;
-                    break;
-                }
-            }
+                int k = 0;
 
-            abort = false;
-
-            foreach (GameObject b in planetNumbersAvailable)
-            {
-                if (b != null)
+                for (int i = 1; i < 10; i++)
                 {
-                    if (b.GetComponent<Planet_Behavior>().a == 0)
+                    if (Input.GetKeyDown("" + i.ToString()))
                     {
-                        abort = true;
+                        k = i;
                         break;
                     }
                 }
-            }
 
-            if (k != 0 && !abort)
-            {
-                if (planetNumbersAvailable[k - 1] == null)
+                abort = false;
+
+                foreach (GameObject b in planetNumbersAvailable)
                 {
-                    GameObject p = Instantiate(planet);
+                    if (b != null)
+                    {
+                        if (b.GetComponent<Planet_Behavior>().a == 0)
+                        {
+                            abort = true;
+                            break;
+                        }
+                    }
+                }
 
-                    p.GetComponent<Planet_Behavior>().key = k;
+                if (k != 0 && !abort)
+                {
+                    if (planetNumbersAvailable[k - 1] == null)
+                    {
+                        GameObject p = Instantiate(planet);
 
-                    Vector3 temp = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y));
-                    temp.z = 0f;
-                    Vector3 mP = temp;
+                        p.GetComponent<Planet_Behavior>().key = k;
 
-                    p.transform.position = mP;
+                        Vector3 temp = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y));
+                        temp.z = 0f;
+                        Vector3 mP = temp;
 
-                    planetNumbersAvailable[k - 1] = p;
+                        p.transform.position = mP;
 
-                    p.GetComponent<Planet_Behavior>().namePlate.enabled = enabledStart;
+                        planetNumbersAvailable[k - 1] = p;
+
+                        p.GetComponent<Planet_Behavior>().namePlate.enabled = enabledStart;
+                    }
                 }
             }
-        }
     }
 
     public Color requestColor(int i)

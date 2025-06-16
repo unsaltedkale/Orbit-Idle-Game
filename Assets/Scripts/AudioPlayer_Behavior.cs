@@ -15,10 +15,14 @@ public class AudioPlayer_Behavior : MonoBehaviour
     public Sprite musicOffIcon;
     public Sprite sfxOnIcon;
     public Sprite sfxOffIcon;
+    public float baseMusicVolume;
+    public float baseSFXVolume;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        musicSlider.value = baseMusicVolume;
+        sfxSlider.value = baseSFXVolume;
 
     }
 
@@ -28,10 +32,24 @@ public class AudioPlayer_Behavior : MonoBehaviour
 
     }
 
+    public void hide(bool b)
+    {
+        musicSlider.gameObject.SetActive(b);
+        sfxSlider.gameObject.SetActive(b);
+        musicToggle.gameObject.SetActive(b);
+        sfxToggle.gameObject.SetActive(b);
+
+    }
+
+    public void restartMusic()
+    {
+        musicPlayer.Play();
+    }
+
     public void updateMusic()
     {
-
-
+        float v = musicSlider.value;
+        musicPlayer.volume = v * baseMusicVolume;
     }
 
     public void toggleMusic()
@@ -39,7 +57,7 @@ public class AudioPlayer_Behavior : MonoBehaviour
         print("run");
         bool b = musicToggle.isOn;
 
-        musicPlayer.mute = b;
+        musicPlayer.mute = !b;
 
         if (b == true)
         {
@@ -55,11 +73,26 @@ public class AudioPlayer_Behavior : MonoBehaviour
 
     public void updateSFX()
     {
-
+        float v = sfxSlider.value;
+        sfxPlayer.volume = v * baseSFXVolume;
     }
 
     public void toggleSFX()
     {
+        print("run");
+        bool b = sfxToggle.isOn;
+
+        sfxPlayer.mute = !b;
+
+        if (b == true)
+        {
+            sfxImage.overrideSprite = sfxOnIcon;
+        }
+
+        if (b == false)
+        {
+            sfxImage.overrideSprite = sfxOffIcon;
+        }
 
     }
 }

@@ -19,7 +19,7 @@ public class Camera_Behavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void updateZoom()
@@ -27,5 +27,10 @@ public class Camera_Behavior : MonoBehaviour
         zoomSliderValue = zoomSlider.value;
         Camera.main.orthographicSize = zoomSliderValue * baseZoom;
 
+    }
+
+    public void hide(bool b)
+    {
+        zoomSlider.gameObject.SetActive(b);
     }
 }

@@ -158,12 +158,12 @@ public class Planet_Behavior : MonoBehaviour
             {
                 if (h.x < j.x)
                 {
-                    theta += (h.y / Mathf.Abs(h.y)) * (orbitSpeed * Time.deltaTime);
+                    theta += (returnSign(h.y)) * (orbitSpeed * Time.deltaTime);
                 }
 
                 else if (h.x > j.x)
                 {
-                    theta -= (h.y / Mathf.Abs(h.y)) * (orbitSpeed * Time.deltaTime);   
+                    theta -= (returnSign(h.y)) * (orbitSpeed * Time.deltaTime);   
                 }
 
                 theta = theta % (2 * Mathf.PI);
@@ -175,6 +175,24 @@ public class Planet_Behavior : MonoBehaviour
                 transform.position = new Vector3(v1, v2, 0f);
             }
 
+    }
+
+    public float returnSign(float f)
+    {
+        if (f >= 0)
+        {
+            return 1f;
+        }
+
+        else if (f < 0)
+        {
+            return -1f;
+        }
+
+        else
+        {
+            return 1f;
+        }
     }
 
     public IEnumerator startPlanet()
@@ -216,7 +234,7 @@ public class Planet_Behavior : MonoBehaviour
     {
         if (h.x - j.x == 0)
         {
-            j.x = j.x + ((-1 * j.x / Mathf.Abs(j.x)) * 0.1f);
+            j.x = j.x + ((-1 * returnSign(j.x)) * 0.1f);
         }
 
         j = new Vector3 (j.x, 0f, 0f);
@@ -224,6 +242,11 @@ public class Planet_Behavior : MonoBehaviour
         r = Mathf.Sqrt((Mathf.Pow(h.x, 2)) + (Mathf.Pow(h.y, 2)));
 
         d = h.y;
+
+        if (d == 0)
+        {
+            d = 0.1f;
+        }
 
         o = Mathf.Sqrt((Mathf.Pow(h.x - j.x, 2)) + (Mathf.Pow(h.y - j.y, 2)));
 
