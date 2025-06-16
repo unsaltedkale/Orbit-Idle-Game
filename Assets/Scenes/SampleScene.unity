@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 47378185}
   - component: {fileID: 47378184}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: UI Help Tip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -176,7 +176,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Press P to close UI menus
+  m_text: Press W to close UI menus
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1926,6 +1926,10 @@ MonoBehaviour:
   baseStarMass: 0
   currentState: 0
   enabledStart: 0
+  camera_Behavior: {fileID: 519420033}
+  audioPlayer_Behavior: {fileID: 1408918130}
+  isUIOpen: 0
+  uiHelpTipText: {fileID: 47378184}
 --- !u!1 &1373273580
 GameObject:
   m_ObjectHideFlags: 0
