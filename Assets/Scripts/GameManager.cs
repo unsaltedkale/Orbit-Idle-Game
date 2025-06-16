@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -32,6 +33,12 @@ public class GameManager : MonoBehaviour
     public AudioPlayer_Behavior audioPlayer_Behavior;
     public bool isUIOpen;
     public TextMeshProUGUI uiHelpTipText;
+    public List<GameObject> faeStarList;
+    public Toggle faeStarToggle;
+    public Slider faeStarSlider;
+    public Sprite faeStarsOnIcon;
+    public Sprite faeStarsOffIcon;
+    public Image faeStarsImage;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
@@ -54,6 +61,51 @@ public class GameManager : MonoBehaviour
 
         StartCoroutine(StartStar());
 
+    }
+
+    public void toggleFaeStars()
+    {
+        bool b = faeStarToggle.isOn;
+
+        foreach (GameObject faeStar in faeStarList)
+        {
+            if (faeStar != null)
+            {
+                faeStar.SetActive(b);
+                FaeStar_Behavior fsb = faeStar.GetComponent<FaeStar_Behavior>();
+
+            }
+
+        }
+
+        if (b == true)
+        {
+            faeStarsImage.overrideSprite = faeStarsOnIcon;
+        }
+
+        if (b == false)
+        {
+            faeStarsImage.overrideSprite = faeStarsOffIcon;
+        }
+
+
+    }
+
+    public void updateFaeStars()
+    {
+        float v = faeStarSlider.value;
+
+        foreach (GameObject faeStar in faeStarList)
+        {
+            if (faeStar != null)
+            {
+                FaeStar_Behavior fsb = faeStar.GetComponent<FaeStar_Behavior>();
+
+                fsb.brightness = v;
+
+            }
+
+        }
     }
 
     public IEnumerator StartStar()
@@ -147,6 +199,10 @@ public class GameManager : MonoBehaviour
             audioPlayer_Behavior.hide(isUIOpen);
 
             uiHelpTipText.enabled = isUIOpen;
+
+            faeStarSlider.gameObject.SetActive(isUIOpen);
+            faeStarToggle.gameObject.SetActive(isUIOpen);
+            faeStarsImage.gameObject.SetActive(isUIOpen);
             
         }
 
