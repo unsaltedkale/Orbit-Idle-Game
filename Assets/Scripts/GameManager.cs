@@ -110,6 +110,14 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator StartStar()
     {
+        yield return null;
+
+        star = Instantiate(starPrefab, new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0));
+
+        Destroy(star);
+
+        yield return null;
+        
         float newStarMass = Mathf.Clamp(baseStarMass + Random.Range(-0.3f, 0.3f), 0.08f, 30f);
 
         Color newProtoStarColor = colorProtoStars[Random.Range(0, colorProtoStars.Count)];
